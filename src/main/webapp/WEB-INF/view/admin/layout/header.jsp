@@ -388,7 +388,7 @@
                             <li><a class="dropdown-item d-flex align-items-center" href="/admin/profile/${id}"><i
                                         class="bx bx-user fs-5"></i><span>Profile</span></a>
                             </li>
-                            <li><a class="dropdown-item d-flex align-items-center" href="#"><i
+                            <li><a class="dropdown-item d-flex align-items-center" href="/admin/change-password/${id}"><i
                                         class="bx bx-cog fs-5"></i><span>Change Password </span></a>
                             </li>
                             <li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i
