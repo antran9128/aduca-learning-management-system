@@ -31,8 +31,8 @@ public class WebSecurityConfig {
 
   @Bean
   public DaoAuthenticationProvider authProvider(
-    PasswordEncoder passwordEncoder,
-    UserDetailsService userDetailsService) {
+      PasswordEncoder passwordEncoder,
+      UserDetailsService userDetailsService) {
     DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
     authProvider.setUserDetailsService(userDetailsService);
     authProvider.setPasswordEncoder(passwordEncoder);
@@ -57,29 +57,29 @@ public class WebSecurityConfig {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests(authz -> authz
-      .dispatcherTypeMatchers(DispatcherType.FORWARD,
-        DispatcherType.INCLUDE)
-      .permitAll()
-      .requestMatchers("/", "/login", "/client/**", "/admin/css/**", "/admin/images/**", "/admin/flags/**",
-        "/admin/fonts/**", "/admin/js/**", "/admin/plugins/**")
-      .permitAll()
-      .requestMatchers("/admin/**").hasAuthority("ROLE_Admin")
-      .anyRequest().authenticated())
-      .sessionManagement((sessionManagement) -> sessionManagement
-        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-        .invalidSessionUrl("/logout?expired")
-        .maximumSessions(1)
-        .maxSessionsPreventsLogin(false))
+        .dispatcherTypeMatchers(DispatcherType.FORWARD,
+            DispatcherType.INCLUDE)
+        .permitAll()
+        .requestMatchers("/", "/login", "/client/**", "/admin/css/**", "/admin/images/**", "/admin/flags/**",
+            "/admin/fonts/**", "/admin/js/**", "/admin/plugins/**")
+        .permitAll()
+        .requestMatchers("/admin/**").hasAuthority("ROLE_Admin")
+        .anyRequest().authenticated())
+        .sessionManagement((sessionManagement) -> sessionManagement
+            .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+            .invalidSessionUrl("/logout?expired")
+            .maximumSessions(1)
+            .maxSessionsPreventsLogin(false))
 
-      .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
+        .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
 
-      .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
-      .formLogin(formLogin -> formLogin
-        .loginPage("/login")
-        .failureUrl("/login?error")
-        .successHandler(customSuccessHandler())
-        .permitAll())
-      .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
+        .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
+        .formLogin(formLogin -> formLogin
+            .loginPage("/login")
+            .failureUrl("/login?error")
+            .successHandler(customSuccessHandler())
+            .permitAll())
+        .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
 
     return http.build();
   }
