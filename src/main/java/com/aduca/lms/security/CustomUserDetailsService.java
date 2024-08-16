@@ -1,24 +1,35 @@
 package com.aduca.lms.security;
 
+import com.aduca.lms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Service;
 
-import com.aduca.lms.domain.User;
-import com.aduca.lms.repository.UserRepository;
+import java.util.Collections;
 
-public class CustomUserDetailsService implements UserDetailsService {
-    @Autowired
-    private UserRepository userRepo;
+@Service
+public class CustomUserDetailsService implements UserDetailsService{
+  private final UserService userService;
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepo.findByEmail(email);
-        if (user != null) {
-            return new CustomUserDetails(user);
-        }
+  public CustomUserDetailsService(UserService userService) {
+    this.userService = userService;
+  }
 
-        throw new UsernameNotFoundException("Could not find user with email: " + email);
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    com.aduca.lms.domain.User user = this.userService.getUserByEmail(username);
+    if (user == null) {
+      throw new UsernameNotFoundException("user not found");
     }
+
+    return new User(
+      user.getEmail(),
+      user.getPassword(),
+      Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().getName())));
+
+  }
 }

@@ -27,7 +27,7 @@
             <link rel="stylesheet" href="/admin/css/dark-theme.css" />
             <link rel="stylesheet" href="/admin/css/semi-dark.css" />
             <link rel="stylesheet" href="/admin/css/header-colors.css" />
-            <title>Rocker - Bootstrap 5 Admin Dashboard Template</title>
+            <title>${admin.name}</title>
         </head>
 
         <body>

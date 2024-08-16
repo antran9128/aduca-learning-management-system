@@ -80,7 +80,7 @@ public class User extends IdBasedEntity {
     }
 
     public String getPhoto() {
-        return photo;
+        return photo != null ? photo : "no-image.jpg";
     }
 
     public void setPhoto(String photo) {
