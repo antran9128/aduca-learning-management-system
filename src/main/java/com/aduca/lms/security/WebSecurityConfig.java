@@ -64,6 +64,7 @@ public class WebSecurityConfig {
             "/admin/fonts/**", "/admin/js/**", "/admin/plugins/**")
         .permitAll()
         .requestMatchers("/admin/**").hasAuthority("ROLE_Admin")
+        .requestMatchers("/instructor/**").hasAuthority("ROLE_Instructor")
         .anyRequest().authenticated())
         .sessionManagement((sessionManagement) -> sessionManagement
             .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)

@@ -1,4 +1,4 @@
-package com.aduca.lms.controller.admin;
+package com.aduca.lms.controller.instructor;
 
 import java.io.IOException;
 import java.util.Date;
@@ -27,68 +27,67 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @Controller
-public class AdminController {
-
+public class InstructorController {
     private UserService userService;
     private final ServletContext servletContext;
 
-    public AdminController(UserService userService, ServletContext servletContext) {
+    public InstructorController(UserService userService, ServletContext servletContext) {
         this.userService = userService;
         this.servletContext = servletContext;
     }
 
-    @GetMapping("/admin")
+    @GetMapping("/instructor")
     public String getDashboard(Model model) {
-        return "admin/dashboard/show";
+        return "instructor/dashboard/show";
     }
 
-    @GetMapping("/admin/user/create")
+    @GetMapping("/instructor/user/create")
     public String createNewUser() {
         User user = new User();
         user.setName("An Tran");
-        user.setUsername("Admin001");
-        user.setEmail("admin@gmail.com");
+        user.setUsername("Instructor");
+        user.setEmail("instructor@gmail.com");
         user.setPassword("12345");
-        user.setPhoto("avatar-3.png");
+
         user.setAddress("Thai Binh");
-        user.setRole(new Role(1L));
+        user.setRole(new Role(2L));
         userService.saveUser(user);
-        return "admin/dashboard/show";
+        return "instructor/dashboard/show";
     }
 
-    @GetMapping("/admin/profile/{id}")
-    public String getAdminProfile(@PathVariable("id") Long id, Model model) {
+    @GetMapping("/instructor/profile/{id}")
+    public String getinstructorProfile(@PathVariable("id") Long id, Model model) {
         try {
-            User admin = userService.getUserById(id);
-            model.addAttribute("admin", admin);
-            return "admin/dashboard/profile";
+            User instructor = userService.getUserById(id);
+            model.addAttribute("instructor", instructor);
+            return "instructor/dashboard/profile";
 
         } catch (UserNotFoundException e) {
-            return "admin/dashboard/show";
+            return "instructor/dashboard/show";
         }
     }
 
-    @PostMapping("/admin/profile/update")
-    public String updateAdminProfile(Model model,
-            @ModelAttribute("admin") User admin,
+    @PostMapping("/instructor/profile/update")
+    public String updateinstructorProfile(Model model,
+            @ModelAttribute("instructor") User instructor,
             @RequestParam("avatarFile") MultipartFile multipartFile,
             RedirectAttributes redirectAttributes,
             HttpServletRequest request) throws IOException {
 
         try {
-            User currentUser = this.userService.getUserById(admin.getId());
-            currentUser.setName(admin.getName());
-            currentUser.setUsername(admin.getUsername());
-            currentUser.setEmail(admin.getEmail());
-            currentUser.setAddress(admin.getAddress());
-            currentUser.setPhone(admin.getPhone());
+            User currentUser = this.userService.getUserById(instructor.getId());
+            currentUser.setName(instructor.getName());
+            currentUser.setUsername(instructor.getUsername());
+            currentUser.setEmail(instructor.getEmail());
+            currentUser.setAddress(instructor.getAddress());
+            currentUser.setPhone(instructor.getPhone());
             currentUser.setUpdatedAt(new Date());
 
             if (!multipartFile.isEmpty()) {
                 String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
                 currentUser.setPhoto(fileName);
 
-                String uploadDir = this.servletContext.getRealPath("/resources/admin/images/avatars/")
+                String uploadDir = this.servletContext.getRealPath("/resources/instructor/images/avatars/")
                         + currentUser.getId();
 
                 FileUploadUtil.cleanDir(uploadDir);
@@ -99,40 +98,40 @@ public class AdminController {
             userService.updateSessionInfo(request, currentUser);
 
             userService.saveUser(currentUser);
-            redirectAttributes.addFlashAttribute("message", "Admin Profile Updated Successfully");
+            redirectAttributes.addFlashAttribute("message", "instructor Profile Updated Successfully");
             redirectAttributes.addFlashAttribute("alertType", "success");
-            return "redirect:/admin/profile/" + admin.getId();
+            return "redirect:/instructor/profile/" + instructor.getId();
         } catch (UserNotFoundException e) {
             redirectAttributes.addFlashAttribute("message", "Something is wrong, please try again later!");
             redirectAttributes.addFlashAttribute("alertType", "error");
-            return "redirect:/admin/profile/" + admin.getId();
+            return "redirect:/instructor/profile/" + instructor.getId();
         }
 
     }
 
-    @GetMapping("/admin/change-password/{id}")
+    @GetMapping("/instructor/change-password/{id}")
     public String getChangePassword(Model model, @PathVariable("id") Long id) {
         try {
-            User admin = userService.getUserById(id);
-            model.addAttribute("admin", admin);
+            User instructor = userService.getUserById(id);
+            model.addAttribute("instructor", instructor);
             ResetPassword password = new ResetPassword();
             password.setId(id);
             model.addAttribute("password", password);
-            return "admin/auth/change-password";
+            return "instructor/auth/change-password";
         } catch (UserNotFoundException e) {
-            return "admin/dashboard/show";
+            return "instructor/dashboard/show";
         }
     }
 
-    @PostMapping("/admin/change-password")
+    @PostMapping("/instructor/change-password")
     public String changePassword(Model model,
             @ModelAttribute("password") @Valid ResetPassword pass,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes) throws UserNotFoundException {
         if (bindingResult.hasErrors()) {
-            User admin = userService.getUserById(pass.getId());
-            model.addAttribute("admin", admin);
-            return "admin/auth/change-password";
+            User instructor = userService.getUserById(pass.getId());
+            model.addAttribute("instructor", instructor);
+            return "instructor/auth/change-password";
         }
 
         User user = userService.getUserById(pass.getId());
@@ -145,10 +144,10 @@ public class AdminController {
 
         } else {
             userService.changePassword(user, pass.getNewPassword());
-            redirectAttributes.addFlashAttribute("message", "Admin Password Updated Successfully");
+            redirectAttributes.addFlashAttribute("message", "instructor Password Updated Successfully");
             redirectAttributes.addFlashAttribute("alertType", "success");
         }
 
-        return "redirect:/admin/change-password/" + user.getId();
+        return "redirect:/instructor/change-password/" + user.getId();
     }
 }
