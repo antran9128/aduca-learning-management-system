@@ -3,6 +3,7 @@ package com.aduca.lms.security;
 import com.aduca.lms.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -55,17 +56,90 @@ public class WebSecurityConfig {
   }
 
   @Bean
-  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http.authorizeHttpRequests(authz -> authz
-        .dispatcherTypeMatchers(DispatcherType.FORWARD,
-            DispatcherType.INCLUDE)
-        .permitAll()
-        .requestMatchers("/", "/login", "/client/**", "/admin/css/**", "/admin/images/**", "/admin/flags/**",
-            "/admin/fonts/**", "/admin/js/**", "/admin/plugins/**")
-        .permitAll()
-        .requestMatchers("/admin/**").hasAuthority("ROLE_Admin")
-        .requestMatchers("/instructor/**").hasAuthority("ROLE_Instructor")
-        .anyRequest().authenticated())
+  @Order(1)
+  public SecurityFilterChain adminFilterChain(HttpSecurity http) throws Exception {
+    http
+        .securityMatcher("/admin/**")
+        .authorizeHttpRequests(authz -> authz
+            .dispatcherTypeMatchers(DispatcherType.FORWARD,
+                DispatcherType.INCLUDE)
+            .permitAll()
+            .requestMatchers("/homepage", "/admin/login", "/login", "/register", "/client/**", "/admin/css/**",
+                "/admin/images/**",
+                "/admin/flags/**",
+                "/admin/fonts/**", "/admin/js/**", "/admin/plugins/**")
+            .permitAll()
+            .requestMatchers("/admin/**").hasAuthority("ROLE_Admin")
+            .anyRequest().authenticated())
+        .sessionManagement((sessionManagement) -> sessionManagement
+            .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+            .invalidSessionUrl("/admin/logout?expired")
+            .maximumSessions(1)
+            .maxSessionsPreventsLogin(false))
+        .logout(logout -> logout
+            .logoutUrl("/admin/logout")
+            .deleteCookies("JSESSIONID").invalidateHttpSession(true))
+
+        .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
+        .formLogin(formLogin -> formLogin
+            .loginPage("/admin/login")
+            .failureUrl("/admin/login?error")
+            .successHandler(customSuccessHandler())
+            .permitAll())
+        .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
+    return http.build();
+  }
+
+  @Bean
+  @Order(2)
+  public SecurityFilterChain instructorFilterChain(HttpSecurity http) throws Exception {
+    http
+        .securityMatcher("/instructor/**")
+        .authorizeHttpRequests(authz -> authz
+            .dispatcherTypeMatchers(DispatcherType.FORWARD,
+                DispatcherType.INCLUDE)
+            .permitAll()
+            .requestMatchers("/homepage", "/admin/login", "/login", "/register", "/client/**", "/admin/css/**",
+                "/admin/images/**",
+                "/admin/flags/**",
+                "/admin/fonts/**", "/admin/js/**", "/admin/plugins/**")
+            .permitAll()
+            .requestMatchers("/instructor/**").hasAuthority("ROLE_Instructor")
+            .anyRequest().authenticated())
+        .sessionManagement((sessionManagement) -> sessionManagement
+            .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+            .invalidSessionUrl("/admin/logout?expired")
+            .maximumSessions(1)
+            .maxSessionsPreventsLogin(false))
+        .logout(logout -> logout
+            .logoutUrl("/admin/logout")
+            .deleteCookies("JSESSIONID").invalidateHttpSession(true))
+
+        .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
+        .formLogin(formLogin -> formLogin
+            .loginPage("/admin/login")
+            .failureUrl("/admin/login?error")
+            .successHandler(customSuccessHandler())
+            .permitAll())
+        .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
+    return http.build();
+  }
+
+  @Bean
+  @Order(3)
+  public SecurityFilterChain userSecurityFilterChain(HttpSecurity http) throws Exception {
+    http.securityMatcher("/**")
+        .authorizeHttpRequests(authz -> authz
+            .dispatcherTypeMatchers(DispatcherType.FORWARD,
+                DispatcherType.INCLUDE)
+            .permitAll()
+            .requestMatchers("/homepage", "/admin/login", "/login", "/register", "/client/**", "/admin/css/**",
+                "/admin/images/**",
+                "/admin/flags/**",
+                "/admin/fonts/**", "/admin/js/**", "/admin/plugins/**")
+            .permitAll()
+            .requestMatchers("/user/**").hasAuthority("ROLE_User")
+            .anyRequest().authenticated())
         .sessionManagement((sessionManagement) -> sessionManagement
             .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
             .invalidSessionUrl("/logout?expired")

@@ -41,7 +41,7 @@ public class User extends IdBasedEntity {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    private boolean status;
+    private boolean status = true;
     private String lastSeen;
     private String rememberToken;
     private Date createdAt;

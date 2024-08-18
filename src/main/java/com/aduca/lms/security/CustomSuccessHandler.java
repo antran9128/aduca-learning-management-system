@@ -27,7 +27,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
     protected String determineTargetUrl(final Authentication authentication) {
 
         Map<String, String> roleTargetUrlMap = new HashMap<>();
-        roleTargetUrlMap.put("ROLE_User", "/");
+        roleTargetUrlMap.put("ROLE_User", "/homepage");
         roleTargetUrlMap.put("ROLE_Admin", "/admin");
         roleTargetUrlMap.put("ROLE_Instructor", "/instructor");
 

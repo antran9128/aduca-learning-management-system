@@ -7,6 +7,7 @@ import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Service;
 
 import com.aduca.lms.domain.User;
+import com.aduca.lms.domain.dto.RegisterDTO;
 import com.aduca.lms.exception.UserNotFoundException;
 import com.aduca.lms.repository.UserRepository;
 
@@ -63,7 +64,7 @@ public class UserService {
         repo.save(theUser);
     }
 
-    public void updateSessionInfo(HttpServletRequest request, User user){
+    public void updateSessionInfo(HttpServletRequest request, User user) {
         HttpSession session = request.getSession(false);
         if (session == null) {
             return;
@@ -78,5 +79,54 @@ public class UserService {
             // int sum = user.getCart() == null ? 0 : user.getCart().getSum();
             // session.setAttribute("sum", sum);
         }
+    }
+
+    public boolean checkUsernameExist(Long id, String username) {
+        User user = repo.findByUsername(username);
+
+        if (user == null)
+            return false;
+
+        boolean isCreatingNew = (id == null);
+
+        if (isCreatingNew) {
+            if (user != null)
+                return true;
+        } else {
+            if (user.getId() != id) {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean checkEmailExist(Long id, String email) {
+        User userByEmail = repo.findByEmail(email);
+
+        if (userByEmail == null)
+            return false;
+
+        boolean isCreatingNew = (id == null);
+
+        if (isCreatingNew) {
+            if (userByEmail != null)
+                return true;
+        } else {
+            if (userByEmail.getId() != id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public User registerDTOtoUser(RegisterDTO registerDTO) {
+        User user = new User();
+        user.setName(registerDTO.getFirstName() + " " + registerDTO.getLastName());
+        user.setUsername(registerDTO.getUsername());
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(registerDTO.getPassword());
+        return user;
     }
 }

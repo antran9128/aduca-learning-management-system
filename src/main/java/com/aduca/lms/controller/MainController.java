@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @GetMapping("/login")
-    public String viewLoginPage() {
+    @GetMapping("/admin/login")
+    public String viewAdminLoginPage() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
             return "admin/auth/login";
@@ -18,5 +18,17 @@ public class MainController {
 
         return "redirect:/admin";
     }
+
+    // @GetMapping("/login")
+    // public String viewLoginPage() {
+    // Authentication authentication =
+    // SecurityContextHolder.getContext().getAuthentication();
+    // if (authentication == null || authentication instanceof
+    // AnonymousAuthenticationToken) {
+    // return "client/auth/login";
+    // }
+
+    // return "redirect:/";
+    // }
 
 }

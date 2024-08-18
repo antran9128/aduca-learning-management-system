@@ -388,8 +388,9 @@
                             <li><a class="dropdown-item d-flex align-items-center" href="/admin/profile/${id}"><i
                                         class="bx bx-user fs-5"></i><span>Profile</span></a>
                             </li>
-                            <li><a class="dropdown-item d-flex align-items-center" href="/admin/change-password/${id}"><i
-                                        class="bx bx-cog fs-5"></i><span>Change Password </span></a>
+                            <li><a class="dropdown-item d-flex align-items-center"
+                                    href="/admin/change-password/${id}"><i class="bx bx-cog fs-5"></i><span>Change
+                                        Password </span></a>
                             </li>
                             <li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i
                                         class="bx bx-home-circle fs-5"></i><span>Dashboard</span></a>
@@ -405,7 +406,8 @@
                             </li>
 
                             <li>
-                                <form method="post" action="/logout" class="dropdown-item d-flex align-items-center">
+                                <form method="post" action="/admin/logout"
+                                    class="dropdown-item d-flex align-items-center">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                     <i class="bx bx-log-out-circle"></i><input type="submit" value="Logout"
                                         style="border: none;background-color: transparent;"></input>

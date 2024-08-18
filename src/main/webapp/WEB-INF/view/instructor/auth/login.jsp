@@ -64,7 +64,7 @@
                                                     <p class="mb-0">Please log in to your account</p>
                                                 </div>
                                                 <div class="form-body">
-                                                    <form class="row g-3" method="post" action="/login">
+                                                    <form class="row g-3" method="post" action="/admin/login">
                                                         <div class="col-12">
                                                             <label for="inputEmailAddress"
                                                                 class="form-label">Email</label>
