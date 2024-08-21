@@ -70,26 +70,25 @@
                                             </ul>
                                         </c:when>
                                         <c:otherwise>
-                                            <!-- <ul
-                                                class="generic-list-item d-flex flex-wrap align-items-center fs-14 border-left border-left-gray pl-3 ml-3">
-                                                ${username}</ul> -->
                                             <ul
                                                 class="generic-list-item d-flex flex-wrap align-items-center fs-14 border-left border-left-gray pl-3 ml-3">
 
                                                 <li
                                                     class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray">
+                                                    <i class="la la-sign-in mr-1"></i><a href="/dashboard">
+                                                        Dashboard</a>
+                                                </li>
+                                                <li class="d-flex align-items-center">
                                                     <form method="post" action="/logout">
                                                         <input type="hidden" name="${_csrf.parameterName}"
                                                             value="${_csrf.token}" />
-                                                        <i class="bx bx-log-out-circle"></i><input type="submit"
+                                                        <i class="la la-user mr-1"></i><input type="submit"
                                                             value="Logout"
                                                             style="border: none;background-color: transparent">
                                                     </form>
-
                                                 </li>
-
-
                                             </ul>
+                                            
                                         </c:otherwise>
                                     </c:choose>
 

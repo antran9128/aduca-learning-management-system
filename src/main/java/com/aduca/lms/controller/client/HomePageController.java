@@ -1,10 +1,14 @@
 package com.aduca.lms.controller.client;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+
+import java.util.Date;
+
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.aduca.lms.domain.*;
 import com.aduca.lms.domain.dto.*;
+import com.aduca.lms.exception.UserNotFoundException;
 import com.aduca.lms.service.UserService;
 
 import jakarta.validation.Valid;
@@ -54,6 +59,7 @@ public class HomePageController {
 
         User newUser = userService.registerDTOtoUser(registerUser);
         newUser.setRole(new Role(3L));
+        newUser.setCreatedAt(new Date());
         userService.saveUser(newUser);
         return "client/auth/login";
     }
@@ -62,5 +68,8 @@ public class HomePageController {
     public String getHomePage() {
         return "client/homepage/show";
     }
+
+
+    
 
 }

@@ -24,6 +24,10 @@ public class RegisterDTO {
     @NotEmpty(message = "The confirm password field is required")
     private String confirmPassword;
 
+    private String phone;
+
+    private String address;
+
     public String getFirstName() {
         return firstName;
     }
@@ -72,4 +76,19 @@ public class RegisterDTO {
         this.confirmPassword = confirmPassword;
     }
 
+    public String getPhone() {
+      return phone;
+    }
+
+    public void setPhone(String phone) {
+      this.phone = phone;
+    }
+
+    public String getAddress() {
+      return address;
+    }
+
+    public void setAddress(String address) {
+      this.address = address;
+    }
 }

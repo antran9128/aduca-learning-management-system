@@ -228,11 +228,12 @@
                 <script src="/admin/js/index.js"></script>
                 <!--app JS-->
                 <script src="/admin/js/app.js"></script>
-                <script type="text/javascript"
-                    src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+                
                 <script>
                     new PerfectScrollbar(".app-container")
                 </script>
+                <script type="text/javascript"
+                src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
                 <c:if test="${not empty message}">
                     <script>
                         var type = "${alertType}";

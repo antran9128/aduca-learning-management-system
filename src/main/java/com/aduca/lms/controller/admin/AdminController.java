@@ -2,16 +2,14 @@ package com.aduca.lms.controller.admin;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -150,5 +148,21 @@ public class AdminController {
         }
 
         return "redirect:/admin/change-password/" + user.getId();
+    }
+
+    @PostMapping("/admin/user/updateStatus")
+    @ResponseBody
+    public Map<String, String> updateUserStatus(@RequestParam("user_id") Long userId,
+                                                @RequestParam("is_checked") int isChecked) {
+      Map<String, String> response = new HashMap<>();
+      try {
+        User user = userService.getUserById(userId);
+        user.setStatus(isChecked == 1);
+        userService.saveUser(user);
+        response.put("message", "User status updated successfully!");
+      } catch (Exception e) {
+        response.put("message", "Error occurred while updating user status.");
+      }
+      return response;
     }
 }

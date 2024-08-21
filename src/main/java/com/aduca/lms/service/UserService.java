@@ -1,7 +1,9 @@
 package com.aduca.lms.service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
+import com.aduca.lms.domain.Role;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Service;
@@ -72,6 +74,7 @@ public class UserService {
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
 
         if (user != null) {
+            session.setAttribute("name", user.getName());
             session.setAttribute("username", user.getUsername());
             session.setAttribute("avatar", user.getPhoto());
             session.setAttribute("id", user.getId());
@@ -127,6 +130,18 @@ public class UserService {
         user.setUsername(registerDTO.getUsername());
         user.setEmail(registerDTO.getEmail());
         user.setPassword(registerDTO.getPassword());
+
+        if(registerDTO.getPhone() != null || !registerDTO.getPhone().isEmpty()){
+          user.setPhone(registerDTO.getPhone());
+        }
+
+      if(registerDTO.getAddress() != null || !registerDTO.getAddress().isEmpty()){
+        user.setAddress(registerDTO.getAddress());
+      }
         return user;
+    }
+
+    public List<User> getAllInstructors() {
+       return repo.findByRole(new Role(2L));
     }
 }

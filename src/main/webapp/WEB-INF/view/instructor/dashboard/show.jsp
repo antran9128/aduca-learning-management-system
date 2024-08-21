@@ -42,6 +42,13 @@
                 <!--start page wrapper -->
                 <div class="page-wrapper">
                     <div class="page-content">
+                        <c:if test="${active}">
+                          <h4>Instructor Account Is <span class="text-success">Active</span> </h4>
+                        </c:if>
+                      <c:if test="${!active}">
+                        <h4>Instructor Account Is <span class="text-danger">InActive</span> </h4>
+                        <p class="text-danger"><b> Plz wait admin will check and approve your account</b> </p>
+                      </c:if>
                         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
                             <div class="col">
                                 <div class="card radius-10 border-start border-0 border-4 border-info">

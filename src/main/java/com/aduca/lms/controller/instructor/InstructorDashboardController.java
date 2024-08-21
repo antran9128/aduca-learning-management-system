@@ -3,6 +3,8 @@ package com.aduca.lms.controller.instructor;
 import java.io.IOException;
 import java.util.Date;
 
+import com.aduca.lms.domain.dto.RegisterDTO;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -27,33 +29,46 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @Controller
-public class InstructorController {
+public class InstructorDashboardController {
     private UserService userService;
     private final ServletContext servletContext;
 
-    public InstructorController(UserService userService, ServletContext servletContext) {
+    public InstructorDashboardController(UserService userService, ServletContext servletContext) {
         this.userService = userService;
         this.servletContext = servletContext;
     }
 
+    @GetMapping("/become/instructor")
+    public String getRegisterPage(Model model){
+      model.addAttribute("registerUser", new RegisterDTO());
+      return "instructor/auth/register";
+    }
+
+  @PostMapping("/become/instructor")
+  public String registerPage(Model model, @ModelAttribute("registerUser") @Valid RegisterDTO registerUser,
+                             BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes){
+    if (bindingResult.hasErrors()) {
+      return "instructor/auth/register";
+    }
+
+    User newUser = userService.registerDTOtoUser(registerUser);
+    newUser.setRole(new Role(2L));
+    newUser.setCreatedAt(new Date());
+    newUser.setStatus(false);
+    userService.saveUser(newUser);
+    return "instructor/auth/login";
+  }
+
     @GetMapping("/instructor")
-    public String getDashboard(Model model) {
+    public String getDashboard(Model model, HttpServletRequest request) throws UserNotFoundException {
+        HttpSession session = request.getSession(false);
+        Long id = (Long) session.getAttribute("id");
+        model.addAttribute("active", userService.getUserById(id).isStatus());
         return "instructor/dashboard/show";
     }
 
-    @GetMapping("/instructor/user/create")
-    public String createNewUser() {
-        User user = new User();
-        user.setName("An Tran");
-        user.setUsername("Instructor");
-        user.setEmail("instructor@gmail.com");
-        user.setPassword("12345");
 
-        user.setAddress("Thai Binh");
-        user.setRole(new Role(2L));
-        userService.saveUser(user);
-        return "instructor/dashboard/show";
-    }
 
     @GetMapping("/instructor/profile/{id}")
     public String getinstructorProfile(@PathVariable("id") Long id, Model model) {
