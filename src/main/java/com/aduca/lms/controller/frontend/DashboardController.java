@@ -1,4 +1,4 @@
-package com.aduca.lms.controller.client;
+package com.aduca.lms.controller.frontend;
 
 import java.io.IOException;
 import java.util.Date;

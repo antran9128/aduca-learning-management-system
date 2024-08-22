@@ -1,4 +1,4 @@
-package com.aduca.lms.controller.instructor;
+package com.aduca.lms.controller.backend;
 
 import java.io.IOException;
 import java.util.Date;
@@ -62,9 +62,9 @@ public class InstructorDashboardController {
 
     @GetMapping("/instructor")
     public String getDashboard(Model model, HttpServletRequest request) throws UserNotFoundException {
-        HttpSession session = request.getSession(false);
-        Long id = (Long) session.getAttribute("id");
-        model.addAttribute("active", userService.getUserById(id).isStatus());
+//        HttpSession session = request.getSession(false);
+//        Long id = (Long) session.getAttribute("id");
+//        model.addAttribute("active", userService.getUserById(id).isStatus());
         return "instructor/dashboard/show";
     }
 

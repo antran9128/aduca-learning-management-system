@@ -1,4 +1,4 @@
-package com.aduca.lms.controller.admin;
+package com.aduca.lms.controller.backend;
 
 import java.io.IOException;
 
@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.PathVariable;
 import com.aduca.lms.domain.Category;
-import com.aduca.lms.domain.User;
 import com.aduca.lms.service.CategoryService;
 import com.aduca.lms.util.FileUploadUtil;
 

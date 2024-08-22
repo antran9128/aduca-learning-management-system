@@ -29,4 +29,8 @@ public class SubCategoryService {
   public void delete(Long id) {
     repo.deleteById(id);
   }
+
+  public List<SubCategory> findByCategory_Id(Long id){
+    return repo.findByCategory_Id(id);
+  }
 }

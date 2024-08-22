@@ -77,7 +77,7 @@
                                         </div>
 
                                         <div class="form-group col-md-6">
-                                            <label for="input2" class="form-label">Category Image </label>
+                                            <label  class="form-label">Category Image </label>
                                             <input class="form-control" name="photo" type="file" id="image">
                                         </div>
 

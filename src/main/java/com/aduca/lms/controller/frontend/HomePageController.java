@@ -1,7 +1,6 @@
-package com.aduca.lms.controller.client;
+package com.aduca.lms.controller.frontend;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.aduca.lms.domain.*;
 import com.aduca.lms.domain.dto.*;
-import com.aduca.lms.exception.UserNotFoundException;
 import com.aduca.lms.service.UserService;
 
 import jakarta.validation.Valid;
@@ -70,6 +68,6 @@ public class HomePageController {
     }
 
 
-    
+
 
 }

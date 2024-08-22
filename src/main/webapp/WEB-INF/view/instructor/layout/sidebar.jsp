@@ -25,11 +25,19 @@
                 </li>
 
               <c:if test="${active}">
-              <li class="menu-label">UI Elements</li>
+              <li class="menu-label">Course Manage </li>
 
+              <li>
+                <a href="javascript:;" class="has-arrow">
+                  <div class="parent-icon"><i class='bx bx-cart'></i>
+                  </div>
+                  <div class="menu-title">Course Manage</div>
+                </a>
                 <ul>
-
+                  <li> <a href="/instructor/all/course"><i class='bx bx-radio-circle'></i>All Course </a>
+                  </li>
                 </ul>
+              </li>
 
               </c:if>
 

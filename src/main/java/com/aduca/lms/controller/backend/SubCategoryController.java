@@ -1,4 +1,4 @@
-package com.aduca.lms.controller.admin;
+package com.aduca.lms.controller.backend;
 
 import com.aduca.lms.domain.SubCategory;
 import com.aduca.lms.service.CategoryService;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.Locale;
 
 @Controller
 public class SubCategoryController {

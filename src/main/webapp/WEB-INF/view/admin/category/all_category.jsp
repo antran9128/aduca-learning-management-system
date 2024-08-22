@@ -162,20 +162,6 @@
                         </script>
                     </c:if>
             </body>
-            <script type="text/javascript">
-
-                $(document).ready(function () {
-                    $('#image').change(function (e) {
-                        var reader = new FileReader();
-                        reader.onload = function (e) {
-                            $('#showImage').attr('src', e.target.result);
-                        }
-                        reader.readAsDataURL(e.target.files['0']);
-                    });
-                });
-
-            </script>
-
             <!--Datatable-->
             <script src="/admin/plugins/datatable/js/jquery.dataTables.min.js"></script>
             <script src="admin/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>

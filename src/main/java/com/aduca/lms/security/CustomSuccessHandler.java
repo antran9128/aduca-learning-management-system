@@ -47,7 +47,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         String email = authentication.getName();
         // query user
         User user = this.userService.getUserByEmail(email);
-
+        user.isStatus();
         userService.updateSessionInfo(request, user);
     }
 

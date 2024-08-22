@@ -1,8 +1,6 @@
-package com.aduca.lms.controller.admin;
+package com.aduca.lms.controller.backend;
 
-import com.aduca.lms.domain.Role;
 import com.aduca.lms.service.UserService;
-import jakarta.servlet.ServletContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
