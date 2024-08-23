@@ -21,7 +21,7 @@ public class Course extends IdBasedEntity{
   @JoinColumn(name = "instructor_id")
   private User instructor;
 
-  @OneToMany(mappedBy = "course")
+  @OneToMany(mappedBy = "course", cascade=CascadeType.ALL)
   private List<CourseGoal> courseGoals = new ArrayList<>();
 
   private String courseImage;
@@ -43,6 +43,12 @@ public class Course extends IdBasedEntity{
   private boolean status;
   private Date createdAt;
   private Date updateAt;
+
+  public Course(Long id) {
+    this.id = id;
+  }
+  public Course() {
+  }
 
   public Category getCategory() {
     return category;
@@ -97,7 +103,7 @@ public class Course extends IdBasedEntity{
   }
 
   public void setCourseNameSlug(String courseNameSlug) {
-    this.courseNameSlug = courseNameSlug;
+    this.courseNameSlug = courseNameSlug.toLowerCase().strip().replace(" ", "-");
   }
 
   public String getDescription() {
@@ -218,5 +224,13 @@ public class Course extends IdBasedEntity{
 
   public void setUpdateAt(Date updateAt) {
     this.updateAt = updateAt;
+  }
+
+  public List<CourseGoal> getCourseGoals() {
+    return courseGoals;
+  }
+
+  public void setCourseGoals(List<CourseGoal> courseGoals) {
+    this.courseGoals = courseGoals;
   }
 }

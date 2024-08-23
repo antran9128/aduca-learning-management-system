@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -22,7 +23,7 @@ public class Category extends IdBasedEntity{
     private Date createdAt;
     private Date updatedAt;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade= CascadeType.ALL)
     private List<SubCategory> subCategories = new ArrayList<>();
 
     public Category() {
@@ -35,6 +36,10 @@ public class Category extends IdBasedEntity{
         this.image = image;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    public Category(Long id) {
+        this.id = id;
     }
 
     public String getCategoryName() {

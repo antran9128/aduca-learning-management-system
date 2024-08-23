@@ -48,7 +48,7 @@
                         <div class="menu-title">Manage Instructor</div>
                     </a>
                     <ul>
-                        <li> <a href="admin/all/instructor"><i class='bx bx-radio-circle'></i>All Instructor</a>
+                        <li> <a href="/admin/all/instructor"><i class='bx bx-radio-circle'></i>All Instructor</a>
                         </li>
 
 

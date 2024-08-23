@@ -46,7 +46,15 @@ public class User extends IdBasedEntity {
     private Date createdAt;
     private Date updatedAt;
 
-    public String getName() {
+    public User(Long id) {
+        this.id = id;
+    }
+
+  public User() {
+
+  }
+
+  public String getName() {
         return name;
     }
 

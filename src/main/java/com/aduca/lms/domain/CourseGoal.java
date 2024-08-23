@@ -18,6 +18,15 @@ public class CourseGoal extends IdBasedEntity{
   private Date createdAt;
   private Date updateAt;
 
+  public CourseGoal() {
+  }
+
+  public CourseGoal(Course course, String goalName, Date createdAt) {
+    this.course = course;
+    this.goalName = goalName;
+    this.createdAt = createdAt;
+  }
+
   public Course getCourse() {
     return course;
   }

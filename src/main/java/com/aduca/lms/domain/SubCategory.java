@@ -1,12 +1,11 @@
 package com.aduca.lms.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "sub_categories")
@@ -20,6 +19,9 @@ public class SubCategory extends IdBasedEntity {
     private Date createdAt;
     private Date updatedAt;
 
+    @OneToMany(mappedBy = "subCategory", cascade = CascadeType.ALL)
+    private List<Course> courses = new ArrayList<>();
+
   public SubCategory() {
   }
 
@@ -29,6 +31,10 @@ public class SubCategory extends IdBasedEntity {
     this.category = category;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
+  }
+
+  public SubCategory(Long id) {
+    this.id = id;
   }
 
   public String getSubcategoryName() {

@@ -70,7 +70,7 @@ public class WebSecurityConfig {
                                                                 "/admin/images/**",
                                                                 "/admin/flags/**",
                                                                 "/admin/fonts/**", "/admin/js/**", "/admin/plugins/**",
-                                                                "/cat-photos/**")
+                                                  "/upload/**")
                                                 .permitAll()
                                                 .requestMatchers("/admin/**").hasAuthority("ROLE_Admin")
                                                 .anyRequest().authenticated())
@@ -108,7 +108,7 @@ public class WebSecurityConfig {
                                                                 "/admin/images/**",
                                                                 "/admin/flags/**",
                                                                 "/admin/fonts/**", "/admin/js/**", "/admin/plugins/**",
-                                                                "/cat-photos/**")
+                                                  "/upload/**")
                                                 .permitAll()
                                                 .requestMatchers("/instructor/**").hasAuthority("ROLE_Instructor")
                                                 .anyRequest().authenticated())
@@ -144,8 +144,7 @@ public class WebSecurityConfig {
                                                                 "/admin/css/**",
                                                                 "/admin/images/**",
                                                                 "/admin/flags/**",
-                                                                "/admin/fonts/**", "/admin/js/**", "/admin/plugins/**",
-                                                                "/cat-photos/**", "/become/**")
+                                                                "/admin/fonts/**", "/admin/js/**", "/admin/plugins/**", "/become/**", "/upload/**")
                                                 .permitAll()
                                                 .requestMatchers("/user/**").hasAuthority("ROLE_User")
                                                 .anyRequest().authenticated())

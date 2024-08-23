@@ -67,9 +67,9 @@
       <div class="card">
         <div class="card-body p-4">
           <h5 class="mb-4">Add Course</h5>
-          <form:form action="/instructor/add/course" method="post" class="row g-3" enctype="multipart/form-data"
+          <form:form action="/instructor/save/course" method="post" class="row g-3" enctype="multipart/form-data"
                      modelAttribute="course">
-
+          <form:input type="hidden" path="instructorId" value="${id}"/>
           <div class="form-group col-md-6">
             <label for="input1" class="form-label">Course Name</label>
             <form:input type="text" path="courseName" class="form-control"/>
@@ -82,7 +82,10 @@
 
           <div class="form-group col-md-6">
             <label class="form-label">Course Image </label>
-            <input class="form-control" name="image" type="file" id="image">
+            <input class="form-control ${not empty imageError ? 'is-invalid' : ''}" name="image" type="file" id="image">
+            <c:if test="${imageError != null}">
+              <p class="invalid-feedback">${imageError}</p>
+            </c:if>
           </div>
 
           <div class="col-md-6">
@@ -93,7 +96,10 @@
 
           <div class="form-group col-md-6">
             <label class="form-label">Course Intro Video </label>
-            <input type="file" name="video" class="form-control" accept="video/mp4, video/webm">
+            <input type="file" name="intro" class="form-control ${not empty videoError ? 'is-invalid' : ''}" accept="video/mp4, video/webm">
+            <c:if test="${videoError != null}">
+              <p class="invalid-feedback">${videoError}</p>
+            </c:if>
           </div>
 
           <div class="form-group col-md-6">
@@ -102,7 +108,7 @@
 
           <div class="form-group col-md-6">
             <label for="input1" class="form-label">Course Category </label>
-            <form:select path="category.id" class="form-select mb-3" id="category">
+            <form:select path="categoryId" class="form-select mb-3" id="category">
               <option selected="" disabled>Open this select menu</option>
               <form:options items="${categories}" itemValue="id" itemLabel="categoryName"/>
             </form:select>
@@ -111,7 +117,7 @@
 
           <div class="form-group col-md-6">
             <label for="input1" class="form-label">Course Subcategory </label>
-            <form:select path="subCategory.id" id="subcategory" class="form-select mb-3"
+            <form:select path="subCategoryId" id="subcategory" class="form-select mb-3"
                          aria-label="Default select example">
               <option selected="" disabled>Open this select menu</option>
             </form:select>
@@ -175,7 +181,7 @@
             <div class="col-md-6">
               <div class="mb-3">
                 <label for="goals" class="form-label"> Goals </label>
-                <input type="text" name="course_goals[]" id="goals" class="form-control" placeholder="Goals ">
+                <form:input type="text" path="courseGoals[0]" id="goals" class="form-control" placeholder="Goals "/>
               </div>
             </div>
             <div class="form-group col-md-6" style="padding-top: 30px;">
@@ -220,6 +226,28 @@
                 <button type="submit" class="btn btn-primary px-4">Save Changes</button>
               </div>
             </div>
+
+            <!--========== Start of add multiple class with ajax ==============-->
+            <div style="visibility: hidden">
+              <div class="whole_extra_item_add" id="whole_extra_item_add">
+                <div class="whole_extra_item_delete" id="whole_extra_item_delete">
+                  <div class="container mt-2">
+                    <div class="row">
+
+
+                      <div class="form-group col-md-6">
+                        <label for="goals">Goals</label>
+                        <form:input type="text" path="courseGoals[0]" id="goals" class="form-control" placeholder="Goals "/>
+                      </div>
+                      <div class="form-group col-md-6" style="padding-top: 20px">
+                        <span class="btn btn-success btn-sm addeventmore"><i class="fa fa-plus-circle">Add</i></span>
+                        <span class="btn btn-danger btn-sm removeeventmore"><i class="fa fa-minus-circle">Remove</i></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             </form:form>
           </div>
         </div>
@@ -236,27 +264,7 @@
   <jsp:include page="../layout/footer.jsp"/>
 </div>
 <!--end wrapper-->
-<!--========== Start of add multiple class with ajax ==============-->
-<div style="visibility: hidden">
-  <div class="whole_extra_item_add" id="whole_extra_item_add">
-    <div class="whole_extra_item_delete" id="whole_extra_item_delete">
-      <div class="container mt-2">
-        <div class="row">
 
-
-          <div class="form-group col-md-6">
-            <label for="goals">Goals</label>
-            <input type="text" name="course_goals[]" id="goals" class="form-control" placeholder="Goals  ">
-          </div>
-          <div class="form-group col-md-6" style="padding-top: 20px">
-            <span class="btn btn-success btn-sm addeventmore"><i class="fa fa-plus-circle">Add</i></span>
-            <span class="btn btn-danger btn-sm removeeventmore"><i class="fa fa-minus-circle">Remove</i></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 <!-- Bootstrap JS -->
@@ -317,15 +325,28 @@ function getSubCategories(){
 <!----For Section-------->
 <script type="text/javascript">
   $(document).ready(function(){
-    var counter = 0;
-    $(document).on("click",".addeventmore",function(){
+    var counter = 1; // Start counter at 1 since we already have [0]
+
+    // Handle Add More button click
+    $(document).on("click", ".addeventmore", function(){
+      console.log(counter);
       var whole_extra_item_add = $("#whole_extra_item_add").html();
-      $(this).closest(".add_item").append(whole_extra_item_add);
+
+      // Increment counter and update the index in the new input field
+      var newItem = $(whole_extra_item_add).clone();
+      newItem.find("input").each(function(){
+        var newPath = $(this).attr("name").replace("courseGoals[0]", "courseGoals[" + counter + "]");
+        $(this).attr("name", newPath);
+      });
+
+      $(this).closest(".add_item").append(newItem);
       counter++;
     });
-    $(document).on("click",".removeeventmore",function(event){
+
+    // Handle Remove button click
+    $(document).on("click", ".removeeventmore", function(){
       $(this).closest("#whole_extra_item_delete").remove();
-      counter -= 1
+      counter--; // Decrement counter when an item is removed
     });
   });
 </script>

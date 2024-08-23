@@ -87,14 +87,15 @@
             <c:forEach var="item" items="${courses}" varStatus="status">
               <tr>
                 <td>${status.index + 1}</td>
-                <td> <img src="" alt="" style="width: 70px; height:40px;"> </td>
-                <td>${item.name}</td>
-                <td>${item.category.name}</td>
+                <td><img src="/upload/course/thumbnail/${item.id}/${item.courseImage}" alt="" style="width: 70px; height:40px;"> </td>
+                <td>${item.courseName}</td>
+                <td>${item.category.categoryName}</td>
                 <td>${item.sellingPrice}</td>
                 <td>${item.discountPrice}</td>
                 <td>
-                  <a href="" class="btn btn-info px-5">Edit </a>
-                  <a href="" class="btn btn-danger px-5" id="delete">Delete </a>
+                  <a href="/instructor/course/update/${item.id}" class="btn btn-info" title="Edit">Edit</a>
+                  <a href="/instructor/course/delete/${item.id}" class="btn btn-danger" id="delete" title="delete">Delete</a>
+                  <a href="" class="btn btn-warning" title="Lecture">Lecture</a>
                 </td>
               </tr>
             </c:forEach>
@@ -142,7 +143,9 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script src="/admin/js/code.js"></script>
   <script src="/admin/plugins/datatable/js/jquery.dataTables.min.js"></script>
-  <script src="admin/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+  <script src="admin/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="/admin/js/code.js"></script>
   <script>
     new PerfectScrollbar(".app-container")
   </script>
@@ -173,6 +176,35 @@
 
   $(document).ready(function () {
     $('#example').DataTable();
+    $(function(){
+      $(document).on('click','#delete',function(e){
+        e.preventDefault();
+        var link = $(this).attr("href");
+
+
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "Delete This Data?",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = link
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+          }
+        })
+
+
+      });
+
+    });
   });
 
 </script>
