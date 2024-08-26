@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Aduca -  Education HTML Template</title>
+    <title>Aduca</title>
 
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -27,13 +27,12 @@
     <link rel="stylesheet" href="/client/css/fancybox.css">
     <link rel="stylesheet" href="/client/css/tooltipster.bundle.css">
     <link rel="stylesheet" href="/client/css/style.css">
+
     <!-- end inject -->
 </head>
 <body>
-
-
+<input type="hidden" name="_csrf" value="${_csrf.token}">
     <jsp:include page="../layout/header.jsp" />
-
 <!--================================
          START HERO AREA
 =================================-->
@@ -1375,5 +1374,7 @@
 <script src="/client/js/tooltipster.bundle.min.js"></script>
 <script src="/client/js/jquery.lazy.min.js"></script>
 <script src="/client/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <jsp:include page="../layout/script.jsp" />
 </body>
 </html>
