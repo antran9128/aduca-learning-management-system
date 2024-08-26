@@ -2,26 +2,22 @@ package com.aduca.lms.domain;
 
 import java.util.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "users")
 public class User extends IdBasedEntity {
 
     @Column(length = 255, nullable = false)
+    @Size(min = 3, message = "Name must have a minimum of 3 characters")
     private String name;
 
     @Column(length = 255, nullable = false, unique = true)
+    @Size(min = 3, message = "Username must have a minimum of 3 characters")
     private String username;
 
-    @NotNull
+    @NotNull(message = "Email field is required!")
     @Email(message = "Email is invalid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
 
@@ -31,7 +27,6 @@ public class User extends IdBasedEntity {
     @Column(length = 255)
     private String photo;
 
-    @Size(min = 10, max = 10)
     private String phone;
 
     @Column(length = 255)
@@ -41,13 +36,30 @@ public class User extends IdBasedEntity {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    private boolean status;
+    private boolean status = true;
     private String lastSeen;
     private String rememberToken;
     private Date createdAt;
     private Date updatedAt;
+    @Transient
+    private String joinedTime;
+    public User(Long id) {
+        this.id = id;
+    }
 
-    public String getName() {
+  public User() {
+
+  }
+
+  public String getJoinedTime() {
+    return joinedTime;
+  }
+
+  public void setJoinedTime(String joinedTime) {
+    this.joinedTime = joinedTime;
+  }
+
+  public String getName() {
         return name;
     }
 
@@ -80,7 +92,7 @@ public class User extends IdBasedEntity {
     }
 
     public String getPhoto() {
-        return photo != null ? photo : "no-image.jpg";
+        return photo;
     }
 
     public void setPhoto(String photo) {

@@ -33,10 +33,11 @@
                         <div class="menu-title">Manage Category</div>
                     </a>
                     <ul>
-                        <li> <a href="#"><i class='bx bx-radio-circle'></i>All Category</a>
+                        <li> <a href="/admin/category"><i class='bx bx-radio-circle'></i>All Category</a>
                         </li>
 
-
+                      <li> <a href="/admin/sub-category"><i class='bx bx-radio-circle'></i>All Sub-category</a>
+                      </li>
                     </ul>
                 </li>
 
@@ -47,7 +48,7 @@
                         <div class="menu-title">Manage Instructor</div>
                     </a>
                     <ul>
-                        <li> <a href="#"><i class='bx bx-radio-circle'></i>All Instructor</a>
+                        <li> <a href="/admin/all/instructor"><i class='bx bx-radio-circle'></i>All Instructor</a>
                         </li>
 
 
