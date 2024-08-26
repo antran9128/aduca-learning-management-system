@@ -78,4 +78,8 @@ public class CourseService {
   public List<Course> getCoursesBySubCategoryAndStatus(SubCategory subcategory) {
     return repo.findBySubCategoryAndStatus(subcategory, true);
   }
+
+  public List<Course> getCoursesByInstructorAndStatus(User user) {
+    return repo.findByInstructorAndStatus(user, true);
+  }
 }

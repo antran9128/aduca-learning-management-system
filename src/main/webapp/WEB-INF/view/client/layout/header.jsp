@@ -153,7 +153,7 @@
                                         <nav class="main-menu">
                                             <ul>
                                                 <li>
-                                                    <a href="#">Home</a>
+                                                    <a href="/homepage">Home</a>
 
                                                 </li>
                                                 <li>
