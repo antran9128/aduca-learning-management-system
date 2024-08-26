@@ -6,6 +6,9 @@ import com.aduca.lms.domain.SubCategory;
 import com.aduca.lms.domain.User;
 import com.aduca.lms.domain.dto.CourseDTO;
 import com.aduca.lms.repository.CourseRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -59,5 +62,20 @@ public class CourseService {
     return newCourse;
   }
 
+  public List<Course> getCoursesLimit(int limit) {
+    Pageable pageable = PageRequest.of(0, limit);
+    return repo.findByStatus(true, pageable);
+  }
 
+  public List<Course> findAllCourse(){
+    return repo.findAll();
+  }
+
+  public List<Course> getCoursesByCategoryAndStatus(Category category){
+    return repo.findByCategoryAndStatus(category, true);
+  }
+
+  public List<Course> getCoursesBySubCategoryAndStatus(SubCategory subcategory) {
+    return repo.findBySubCategoryAndStatus(subcategory, true);
+  }
 }

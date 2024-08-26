@@ -87,7 +87,7 @@
                                                 <c:forEach var="item" items="${categories}" varStatus="status">
                                                     <tr>
                                                         <td>${status.index + 1}</td>
-                                                        <td> <img src="/category/avatar-1.png" alt=""
+                                                        <td> <img src="/upload/category/${item.id}/${item.image}" alt=""
                                                                 style="width: 70px; height:40px;"> </td>
                                                         <td>${item.categoryName}</td>
                                                         <td>${item.categorySlug}</td>

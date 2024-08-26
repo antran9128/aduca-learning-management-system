@@ -95,7 +95,7 @@
                 <td>
                   <a href="/instructor/course/update/${item.id}" class="btn btn-info" title="Edit">Edit</a>
                   <a href="/instructor/course/delete/${item.id}" class="btn btn-danger" id="delete" title="delete">Delete</a>
-                  <a href="" class="btn btn-warning" title="Lecture">Lecture</a>
+                  <a href="/instructor/add/lecture/${item.id}" class="btn btn-warning" title="Lecture">Lecture</a>
                 </td>
               </tr>
             </c:forEach>

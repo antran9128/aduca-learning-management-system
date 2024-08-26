@@ -1,12 +1,16 @@
 package com.aduca.lms.controller.frontend;
 
+import com.aduca.lms.service.CategoryService;
+import com.aduca.lms.service.CourseService;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,9 +28,13 @@ import jakarta.validation.Valid;
 public class HomePageController {
 
     private UserService userService;
+    private CategoryService categoryService;
+    private CourseService courseService;
 
-    public HomePageController(UserService userService) {
+    public HomePageController(UserService userService, CategoryService categoryService, CourseService courseService) {
         this.userService = userService;
+        this.categoryService = categoryService;
+        this.courseService = courseService;
     }
 
     @GetMapping("/login")
@@ -63,7 +71,12 @@ public class HomePageController {
     }
 
     @GetMapping("/homepage")
-    public String getHomePage() {
+    public String getHomePage(Model model) {
+        List<Category> categories = categoryService.getCategoriesLimit(6);
+        model.addAttribute("categories", categories);
+        model.addAttribute("allCategories", categoryService.getAll());
+        model.addAttribute("courses", courseService.getCoursesLimit(6));
+        model.addAttribute("allCourses", courseService.findAllCourse());
         return "client/homepage/show";
     }
 

@@ -129,7 +129,6 @@ public class CourseController {
     Course course = courseService.getById(id);
     List<SubCategory> subcategories = subCategoryService.findByCategory_Id(course.getCategory().getId());
     List<CourseGoal> courseGoals = courseGoalService.findByCourse_Id(id);
-
     List<String> cg = new ArrayList<>();
     for (CourseGoal goal: courseGoals) {
       cg.add(goal.getGoalName());
@@ -155,6 +154,7 @@ public class CourseController {
     course.setCreatedAt(courseDb.getCreatedAt());
     course.setCourseImage(courseDb.getCourseImage());
     course.setStatus(courseDb.isStatus());
+    course.setCourseNameSlug(course.getCourseName());
     courseService.save(course);
 
     redirectAttributes.addFlashAttribute("message", "Edit Course Successfully");
@@ -218,4 +218,16 @@ public class CourseController {
     redirectAttributes.addFlashAttribute("alertType", "success");
     return "redirect:/instructor/all/course";
   }
+
+  @GetMapping("/instructor/add/lecture/{id}")
+  public String getAddLecturePage(@PathVariable("id") Long id, Model model){
+    Course course = courseService.getById(id);
+    model.addAttribute("course", course);
+    model.addAttribute("section", new CourseSection());
+    model.addAttribute("sections", course.getSections());
+
+    return "instructor/course/add_lecture";
+  }
+
+
   }

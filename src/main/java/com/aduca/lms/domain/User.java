@@ -2,11 +2,7 @@ package com.aduca.lms.domain;
 
 import java.util.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 @Entity
@@ -45,13 +41,22 @@ public class User extends IdBasedEntity {
     private String rememberToken;
     private Date createdAt;
     private Date updatedAt;
-
+    @Transient
+    private String joinedTime;
     public User(Long id) {
         this.id = id;
     }
 
   public User() {
 
+  }
+
+  public String getJoinedTime() {
+    return joinedTime;
+  }
+
+  public void setJoinedTime(String joinedTime) {
+    this.joinedTime = joinedTime;
   }
 
   public String getName() {

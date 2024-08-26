@@ -53,7 +53,7 @@ public class CategoryController {
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             category.setImage(fileName);
             Category savedCategory = categoryService.save(category);
-            String uploadDir = this.servletContext.getRealPath("/resources/cat-photos/") + savedCategory.getId();
+            String uploadDir = this.servletContext.getRealPath("/resources/upload/category/") + savedCategory.getId();
 
             FileUploadUtil.cleanDir(uploadDir);
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
@@ -84,7 +84,7 @@ public class CategoryController {
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             category.setImage(fileName);
             Category savedCategory = categoryService.save(category);
-            String uploadDir = this.servletContext.getRealPath("/resources/cat-photos/") + savedCategory.getId();
+            String uploadDir = this.servletContext.getRealPath("/resources/upload/category/") + savedCategory.getId();
 
             FileUploadUtil.cleanDir(uploadDir);
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);

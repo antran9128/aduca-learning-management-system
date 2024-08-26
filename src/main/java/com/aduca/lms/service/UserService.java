@@ -1,5 +1,7 @@
 package com.aduca.lms.service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -15,7 +17,6 @@ import com.aduca.lms.repository.UserRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
 @Service
 public class UserService {
 
@@ -145,4 +146,51 @@ public class UserService {
     public List<User> getAllInstructors() {
        return repo.findByRole(new Role(2L));
     }
+
+  public String getJoinedTimeRelativeToNow(Date createdAt) {
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTime(createdAt);
+
+    Calendar now = Calendar.getInstance();
+
+    int years = now.get(Calendar.YEAR) - calendar.get(Calendar.YEAR);
+    int months = now.get(Calendar.MONTH) - calendar.get(Calendar.MONTH);
+    int days = now.get(Calendar.DAY_OF_YEAR) - calendar.get(Calendar.DAY_OF_YEAR);
+
+    // Điều chỉnh tháng và năm
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+
+    // Điều chỉnh ngày và tính toán tuần
+    if (days < 0) {
+      months--;
+      calendar.add(Calendar.MONTH, 1);
+      days = now.get(Calendar.DAY_OF_YEAR) - calendar.get(Calendar.DAY_OF_YEAR);
+    }
+    int weeks = days / 7;
+    days = days % 7;
+
+    StringBuilder timeDiff = new StringBuilder();
+    if (years > 0) {
+      timeDiff.append(years).append(" year").append(years > 1 ? "s" : "").append(" ");
+    }
+    else if (months > 0) {
+      timeDiff.append(months).append(" month").append(months > 1 ? "s" : "").append(" ");
+    }
+    else if (weeks > 0) {
+      timeDiff.append(weeks).append(" week").append(weeks > 1 ? "s" : "").append(" ");
+    }
+    else if (days > 0) {
+      timeDiff.append(days).append(" day").append(days > 1 ? "s" : "").append(" ");
+    }
+
+    if (timeDiff.length() == 0) {
+      return "Just now";
+    } else {
+      return timeDiff.append("ago").toString().trim();
+    }
+  }
+
 }

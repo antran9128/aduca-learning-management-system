@@ -24,18 +24,28 @@ public class Course extends IdBasedEntity{
   @OneToMany(mappedBy = "course", cascade=CascadeType.ALL)
   private List<CourseGoal> courseGoals = new ArrayList<>();
 
+  @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+  private List<CourseLecture> lectures = new ArrayList<>();
+
+  @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+  private List<CourseSection> sections = new ArrayList<>();
+
+  @Transient
+  private Double discountPercent;
+
   private String courseImage;
   private String courseTitle;
   private String courseName;
   private String courseNameSlug;
+  @Column(length=1000)
   private String description;
   private String video;
   private String label;
   private String duration;
   private String resources;
   private String certificate;
-  private double sellingPrice;
-  private double discountPrice;
+  private Double sellingPrice;
+  private Double discountPrice;
   private String prerequisites;
   private String bestseller;
   private String featured;
@@ -48,6 +58,22 @@ public class Course extends IdBasedEntity{
     this.id = id;
   }
   public Course() {
+  }
+
+  public List<CourseLecture> getLectures() {
+    return lectures;
+  }
+
+  public void setLectures(List<CourseLecture> lectures) {
+    this.lectures = lectures;
+  }
+
+  public List<CourseSection> getSections() {
+    return sections;
+  }
+
+  public void setSections(List<CourseSection> sections) {
+    this.sections = sections;
   }
 
   public Category getCategory() {
@@ -154,19 +180,19 @@ public class Course extends IdBasedEntity{
     this.certificate = certificate;
   }
 
-  public double getSellingPrice() {
+  public Double getSellingPrice() {
     return sellingPrice;
   }
 
-  public void setSellingPrice(double sellingPrice) {
+  public void setSellingPrice(Double sellingPrice) {
     this.sellingPrice = sellingPrice;
   }
 
-  public double getDiscountPrice() {
+  public Double getDiscountPrice() {
     return discountPrice;
   }
 
-  public void setDiscountPrice(double discountPrice) {
+  public void setDiscountPrice(Double discountPrice) {
     this.discountPrice = discountPrice;
   }
 
@@ -232,5 +258,19 @@ public class Course extends IdBasedEntity{
 
   public void setCourseGoals(List<CourseGoal> courseGoals) {
     this.courseGoals = courseGoals;
+  }
+
+  public Double getDiscountPercent() {
+    if(this.discountPrice == null){
+      return Double.valueOf(0);
+    }
+
+    Double amount = sellingPrice - discountPrice;
+    Double result = amount / sellingPrice * 100.0;
+    return Math.round(result * 100.0) / 100.0;
+  }
+
+  public void setDiscountPercent(Double discountPercent) {
+    this.discountPercent = discountPercent;
   }
 }

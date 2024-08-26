@@ -26,6 +26,9 @@ public class Category extends IdBasedEntity{
     @OneToMany(mappedBy = "category", cascade= CascadeType.ALL)
     private List<SubCategory> subCategories = new ArrayList<>();
 
+    @OneToMany(mappedBy = "category")
+    private List<Course> courses = new ArrayList<>();
+
     public Category() {
     }
 
@@ -82,4 +85,19 @@ public class Category extends IdBasedEntity{
         this.updatedAt = updatedAt;
     }
 
+    public List<SubCategory> getSubCategories() {
+      return subCategories;
+    }
+
+    public void setSubCategories(List<SubCategory> subCategories) {
+      this.subCategories = subCategories;
+    }
+
+    public List<Course> getCourses() {
+      return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+      this.courses = courses;
+    }
 }

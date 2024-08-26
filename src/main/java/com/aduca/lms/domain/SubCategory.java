@@ -76,4 +76,12 @@ public class SubCategory extends IdBasedEntity {
   public void setUpdatedAt(Date updatedAt) {
     this.updatedAt = updatedAt;
   }
+
+  public List<Course> getCourses() {
+    return courses;
+  }
+
+  public void setCourses(List<Course> courses) {
+    this.courses = courses;
+  }
 }

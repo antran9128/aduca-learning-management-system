@@ -82,7 +82,7 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <img id="showImage" src="/admin/images/avatars/no_image.jpg" alt="Admin"
+                                            <img id="showImage" src="/upload/category/${category.id}/${category.image}" alt="Admin"
                                                 class="rounded-circle p-1 bg-primary" width="80">
 
                                         </div>
