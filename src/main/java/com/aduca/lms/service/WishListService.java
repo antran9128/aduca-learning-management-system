@@ -1,10 +1,13 @@
 package com.aduca.lms.service;
 
+import com.aduca.lms.domain.Course;
 import com.aduca.lms.domain.WishList;
 import com.aduca.lms.exception.WishListNotFoundException;
 import com.aduca.lms.repository.WishListRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -33,5 +36,14 @@ public class WishListService {
     }catch(NoSuchElementException e){
       throw new WishListNotFoundException("No wishlist found!");
     }
+  }
+
+  public List<Course> getCoursesByUserId(Long id){
+    return repo.findCoursesByUserId(id);
+  }
+
+  @Transactional
+  public void deleteByCourseId(Long courseId, Long userId) {
+    repo.deleteByCourseIdAndUserId(courseId, userId);
   }
 }

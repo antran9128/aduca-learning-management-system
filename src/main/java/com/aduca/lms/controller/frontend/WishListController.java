@@ -7,12 +7,16 @@ import com.aduca.lms.exception.UserNotFoundException;
 import com.aduca.lms.exception.WishListNotFoundException;
 import com.aduca.lms.service.UserService;
 import com.aduca.lms.service.WishListService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class WishListController {
@@ -54,4 +58,23 @@ public class WishListController {
     }
     return response;
   }
+
+  @GetMapping("/user/wishlist")
+  public String userWishlist(Model model, HttpServletRequest request){
+    HttpSession session = request.getSession(false);
+    List<Course> courses = wishListService.getCoursesByUserId((Long) session.getAttribute("id"));
+    model.addAttribute("courses", courses);
+    return "client/dashboard/all_wishlist";
+  }
+
+  @GetMapping("/wishlist/remove/{id}")
+  @ResponseBody
+  public HashMap<String, String> removeWishlist(@PathVariable("id") Long id, HttpServletRequest request){
+    HttpSession session = request.getSession(false);
+    HashMap<String, String> response = new HashMap<>();
+    wishListService.deleteByCourseId(id, (Long) session.getAttribute("id"));
+    response.put("success", "Successfully Course Remove");
+    return response;
+  }
+
 }

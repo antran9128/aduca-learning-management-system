@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -81,5 +82,23 @@ public class CourseService {
 
   public List<Course> getCoursesByInstructorAndStatus(User user) {
     return repo.findByInstructorAndStatus(user, true);
+  }
+
+  public List<CourseDTO> coursesToCourseDTOs(List<Course> courses) {
+    List<CourseDTO> courseDTOS = new ArrayList<>();
+    for (Course course: courses) {
+      CourseDTO courseDTO = new CourseDTO();
+      courseDTO.setId(course.getId());
+      courseDTO.setCourseName(course.getCourseName());
+      courseDTO.setCourseNameSlug(course.getCourseNameSlug());
+      courseDTO.setSellingPrice(course.getSellingPrice());
+      courseDTO.setDiscountPrice(course.getDiscountPrice());
+      courseDTO.setPrice(course.getPrice());
+      courseDTO.setCourseImage(course.getCourseImage());
+      courseDTOS.add(courseDTO);
+
+    }
+
+    return courseDTOS;
   }
 }

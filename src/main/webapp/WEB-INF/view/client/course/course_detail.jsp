@@ -496,8 +496,11 @@
                     <span class="text-color-3">4 days</span> left at this price!
                   </p>
                   <div class="buy-course-btn-box">
-                    <button type="button" class="btn theme-btn w-100 mb-2"><i class="la la-shopping-cart fs-18 mr-1"></i> Add to cart</button>
-                    <button type="button" class="btn theme-btn w-100 theme-btn-white mb-2"><i class="la la-shopping-bag mr-1"></i> Buy this course</button>
+                    <div class="buy-course-btn-box">
+                      <button type="submit" class="btn theme-btn w-100 mb-2" onclick="addToCart(${course.id})" ><i class="la la-shopping-cart fs-18 mr-1"></i> Add to cart</button>
+
+                      <button type="button" class="btn theme-btn w-100 theme-btn-white mb-2"><i class="la la-shopping-bag mr-1"></i> Buy this course</button>
+                    </div>
                   </div>
                   <p class="fs-14 text-center pb-4">30-Day Money-Back Guarantee</p>
                   <div class="preview-course-incentives">
@@ -787,8 +790,7 @@
 <div id="scroll-top">
   <i class="la la-arrow-up" title="Go top"></i>
 </div>
-
-
+<jsp:include page="../layout/script.jsp"/>
 <!-- template js files -->
 <script src="/client/js/jquery-3.4.1.min.js"></script>
 <script src="/client/js/bootstrap.bundle.min.js"></script>
@@ -804,6 +806,9 @@
 <script src="/client/js/jquery.lazy.min.js"></script>
 <script src="/client/js/main.js"></script>
 <script src="/client/js/plyr.js"></script>
+  <script type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 <script>
   var player = new Plyr('#player');
