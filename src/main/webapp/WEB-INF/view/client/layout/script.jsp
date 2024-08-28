@@ -1,4 +1,30 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<c:if test="${not empty message}">
+  <script>
+    var type = "${alertType}";
+    switch (type) {
+      case 'info':
+        toastr.info("${message}");
+        break;
+
+      case 'success':
+        toastr.success("${message}");
+        break;
+
+      case 'warning':
+        toastr.warning("${message}");
+        break;
+
+      case 'error':
+        toastr.error("${message}");
+        break;
+    }
+  </script>
+</c:if>
+
 <%--Start Wishlist Add Option--%>
 <script type="text/javascript">
   function addToWishList(courseId){

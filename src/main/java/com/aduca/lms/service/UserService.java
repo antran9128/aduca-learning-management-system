@@ -81,6 +81,8 @@ public class UserService {
             session.setAttribute("id", user.getId());
             session.setAttribute("email", user.getEmail());
             session.setAttribute("active", user.isStatus());
+            session.setAttribute("address", user.getAddress());
+            session.setAttribute("phone", user.getPhone());
             // int sum = user.getCart() == null ? 0 : user.getCart().getSum();
             // session.setAttribute("sum", sum);
         }
