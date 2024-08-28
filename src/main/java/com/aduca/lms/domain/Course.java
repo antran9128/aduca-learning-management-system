@@ -32,6 +32,8 @@ public class Course extends IdBasedEntity{
 
   @Transient
   private Double discountPercent;
+  @Transient
+  private Double price;
 
   private String courseImage;
   private String courseTitle;
@@ -272,5 +274,13 @@ public class Course extends IdBasedEntity{
 
   public void setDiscountPercent(Double discountPercent) {
     this.discountPercent = discountPercent;
+  }
+
+  public Double getPrice() {
+    return discountPrice == null ? sellingPrice : discountPrice;
+  }
+
+  public void setPrice(Double price) {
+    this.price = price;
   }
 }

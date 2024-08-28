@@ -62,7 +62,7 @@
                 <div class="card-body">
                   <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">${course.label}</h6>
                   <h5 class="card-title"><a href="/course/details/${course.id}/${course.courseNameSlug}">${course.courseName}</a></h5>
-                  <p class="card-text"><a href="">${course.instructor.name}</a></p>
+                  <p class="card-text"><a href="/instructor/details/${course.instructor.id}">${course.instructor.name}</a></p>
                   <div class="rating-wrap d-flex align-items-center py-2">
                       <div class="review-stars">
                         <span class="rating-number">4.4</span>
@@ -82,7 +82,7 @@
                     <c:if test="${course.discountPrice != null}">
                       <p class="card-price text-black font-weight-bold">${course.discountPrice} <span class="before-price font-weight-medium">${course.sellingPrice}</span></p>
                     </c:if>
-                    <div class="icon-element icon-element-sm shadow-sm cursor-pointer" title="Add to Wishlist" id="{{ $course->id }}" onclick="addToWishList(this.id)" ><i class="la la-heart-o"></i></div>
+                    <div class="icon-element icon-element-sm shadow-sm cursor-pointer" title="Add to Wishlist" id="${course.id}" onclick="addToWishList(this.id)" ><i class="la la-heart-o"></i></div>
                   </div>
                 </div><!-- end card-body -->
               </div><!-- end card -->
@@ -133,7 +133,7 @@
                             <div class="card-body">
                               <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">${course.label}</h6>
                               <h5 class="card-title"><a href="/course/details/${course.id}/${course.courseNameSlug}">${course.courseName}</a></h5>
-                              <p class="card-text"><a href="">${course.instructor.name}</a></p>
+                              <p class="card-text"><a href="/instructor/details/${course.instructor.id}">${course.instructor.name}</a></p>
                               <div class="rating-wrap d-flex align-items-center py-2">
                                 <div class="review-stars">
                                   <span class="rating-number">4.4</span>
@@ -153,7 +153,7 @@
                                 <c:if test="${course.discountPrice != null}">
                                   <p class="card-price text-black font-weight-bold">${course.discountPrice} <span class="before-price font-weight-medium">${course.sellingPrice}</span></p>
                                 </c:if>
-                                <div class="icon-element icon-element-sm shadow-sm cursor-pointer" title="Add to Wishlist" id="{{ $course->id }}" onclick="addToWishList(this.id)" ><i class="la la-heart-o"></i></div>
+                                <div class="icon-element icon-element-sm shadow-sm cursor-pointer" title="Add to Wishlist" id="${course.id}" onclick="addToWishList(this.id)" ><i class="la la-heart-o"></i></div>
                               </div>
                             </div><!-- end card-body -->
                           </div><!-- end card -->
@@ -181,7 +181,7 @@
     <div id="tooltip_content_1${course.id}">
       <div class="card card-item">
         <div class="card-body">
-          <p class="card-text pb-2">By <a href="">${course.instructor.name}</a></p>
+          <p class="card-text pb-2">By <a href="/instructor/details/${course.instructor.id}">${course.instructor.name}</a></p>
           <h5 class="card-title pb-1"><a href=""> ${course.courseName}</a></h5>
           <div class="d-flex align-items-center pb-1">
             <c:choose>
@@ -209,7 +209,7 @@
           <div class="d-flex justify-content-between align-items-center">
 
 
-            <button type="submit" class="btn theme-btn flex-grow-1 mr-3" onclick="" ><i class="la la-shopping-cart mr-1 fs-18"></i>Add to Cart</button>
+            <button type="submit" class="btn theme-btn flex-grow-1 mr-3" onclick="addToCart(${course.id})" ><i class="la la-shopping-cart mr-1 fs-18"></i>Add to Cart</button>
 
             <div class="icon-element icon-element-sm shadow-sm cursor-pointer" title="Add to Wishlist"><i class="la la-heart-o"></i></div>
           </div>

@@ -70,7 +70,7 @@
               <span class="student-total pl-2">540,815 students</span>
             </div>
           </div><!-- end d-flex -->
-          <p class="pt-2 pb-1">Created by <a href="teacher-detail.html" class="text-color hover-underline">${course.instructor.name}</a></p>
+          <p class="pt-2 pb-1">Created by <a href="/instructor/details/${course.instructor.id}" class="text-color hover-underline">${course.instructor.name}</a></p>
           <div class="d-flex flex-wrap align-items-center">
             <p class="pr-3 d-flex align-items-center">
               <svg class="svg-icon-color-gray mr-1" width="16px" viewBox="0 0 24 24"><path d="M23 12l-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68L23 12zm-10 5h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg>
@@ -210,7 +210,7 @@
                     </ul>
                   </div><!-- end instructor-img -->
                   <div class="media-body">
-                    <h5><a href="teacher-detail.html">${course.instructor.name}</a></h5>
+                    <h5><a href="/instructor/details/${course.instructor.id}">${course.instructor.name}</a></h5>
                     <span class="d-block lh-18 pt-2 pb-3">Joined ${course.instructor.joinedTime}</span>
                     <p class="text-black lh-18 pb-3">${course.instructor.email}</p>
                     <p class="pb-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
@@ -496,8 +496,11 @@
                     <span class="text-color-3">4 days</span> left at this price!
                   </p>
                   <div class="buy-course-btn-box">
-                    <button type="button" class="btn theme-btn w-100 mb-2"><i class="la la-shopping-cart fs-18 mr-1"></i> Add to cart</button>
-                    <button type="button" class="btn theme-btn w-100 theme-btn-white mb-2"><i class="la la-shopping-bag mr-1"></i> Buy this course</button>
+                    <div class="buy-course-btn-box">
+                      <button type="submit" class="btn theme-btn w-100 mb-2" onclick="addToCart(${course.id})" ><i class="la la-shopping-cart fs-18 mr-1"></i> Add to cart</button>
+
+                      <button type="button" class="btn theme-btn w-100 theme-btn-white mb-2"><i class="la la-shopping-bag mr-1"></i> Buy this course</button>
+                    </div>
                   </div>
                   <p class="fs-14 text-center pb-4">30-Day Money-Back Guarantee</p>
                   <div class="preview-course-incentives">
@@ -594,7 +597,7 @@
   <section class="related-course-area bg-gray pt-60px pb-60px">
     <div class="container">
       <div class="related-course-wrap">
-        <h3 class="fs-28 font-weight-semi-bold pb-35px">More Courses by <a href="teacher-detail.html" class="text-color hover-underline">${course.instructor.name}</a></h3>
+        <h3 class="fs-28 font-weight-semi-bold pb-35px">More Courses by <a href="/instructor/details/${course.instructor.id}" class="text-color hover-underline">${course.instructor.name}</a></h3>
         <div class="view-more-carousel-2 owl-action-styled">
         <c:forEach var="course" items="${relatedCourses}" varStatus="status">
           <div class="card card-item">
@@ -617,7 +620,7 @@
             <div class="card-body">
               <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">${course.label}</h6>
               <h5 class="card-title"><a href="/course/details/${course.id}/${course.courseNameSlug}">${course.courseName}</a></h5>
-              <p class="card-text"><a href="teacher-detail.html">${course.instructor.name}</a></p>
+              <p class="card-text"><a href="/instructor/details/${course.instructor.id}">${course.instructor.name}</a></p>
               <div class="rating-wrap d-flex align-items-center py-2">
                 <div class="review-stars">
                   <span class="rating-number">4.4</span>
@@ -787,8 +790,7 @@
 <div id="scroll-top">
   <i class="la la-arrow-up" title="Go top"></i>
 </div>
-
-
+<jsp:include page="../layout/script.jsp"/>
 <!-- template js files -->
 <script src="/client/js/jquery-3.4.1.min.js"></script>
 <script src="/client/js/bootstrap.bundle.min.js"></script>
@@ -804,6 +806,9 @@
 <script src="/client/js/jquery.lazy.min.js"></script>
 <script src="/client/js/main.js"></script>
 <script src="/client/js/plyr.js"></script>
+  <script type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 <script>
   var player = new Plyr('#player');

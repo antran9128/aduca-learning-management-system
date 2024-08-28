@@ -12,12 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDTO {
-
+  private Long id;
   private Long categoryId;
   private Long subCategoryId;
   private Long instructorId;
   private List<String> courseGoals = new ArrayList<>();
-
   private String courseImage;
   private String courseTitle;
   private String courseName;
@@ -34,6 +33,7 @@ public class CourseDTO {
   private String bestseller;
   private String featured;
   private String highestrated;
+  private Double price;
 
   public Long getCategoryId() {
     return categoryId;
@@ -193,5 +193,21 @@ public class CourseDTO {
 
   public void setHighestrated(String highestrated) {
     this.highestrated = highestrated;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public Double getPrice() {
+    return price;
+  }
+
+  public void setPrice(Double price) {
+    this.price = price;
   }
 }

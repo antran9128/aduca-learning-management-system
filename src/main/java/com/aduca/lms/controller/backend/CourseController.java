@@ -20,10 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class CourseController {
@@ -229,5 +226,31 @@ public class CourseController {
     return "instructor/course/add_lecture";
   }
 
+  @GetMapping("/admin/all/course")
+  public String AdminAllCourse(Model model){
+    model.addAttribute("courses", courseService.findAllCourse());
+    return "admin/course/all_course";
+  }
 
+  @PostMapping("/admin/course/updateStatus")
+  @ResponseBody
+  public Map<String, String> updateUserStatus(@RequestParam("course_id") Long courseId,
+                                              @RequestParam("is_checked") int isChecked) {
+    Map<String, String> response = new HashMap<>();
+    try {
+      Course course = courseService.getById(courseId);
+      course.setStatus(isChecked == 1);
+      courseService.save(course);
+      response.put("message", "Course status updated successfully!");
+    } catch (Exception e) {
+      response.put("message", "Error occurred while updating user status.");
+    }
+    return response;
+  }
+
+  @GetMapping("/admin/course/details/{id}")
+  public String getCourseDetails(Model model, @PathVariable("id") Long id){
+    model.addAttribute("course", courseService.getById(id));
+    return "admin/course/course_details";
+  }
   }

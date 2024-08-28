@@ -63,10 +63,8 @@
                         <div class="menu-title">Manage Courses</div>
                     </a>
                     <ul>
-                        <li> <a href="#"><i class='bx bx-radio-circle'></i>All Courses</a>
+                        <li> <a href="/admin/all/course"><i class='bx bx-radio-circle'></i>All Courses</a>
                         </li>
-
-
                     </ul>
                 </li>
 
@@ -77,7 +75,7 @@
                         <div class="menu-title">Manage Coupon</div>
                     </a>
                     <ul>
-                        <li> <a href="#"><i class='bx bx-radio-circle'></i>All Coupon</a>
+                        <li> <a href="/admin/all/coupon"><i class='bx bx-radio-circle'></i>All Coupon</a>
                         </li>
 
 
