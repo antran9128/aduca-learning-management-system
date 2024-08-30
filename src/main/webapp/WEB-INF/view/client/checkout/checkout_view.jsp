@@ -66,7 +66,7 @@
           <div class="card-body">
             <h3 class="card-title fs-22 pb-3">Billing Details</h3>
             <div class="divider"><span></span></div>
-            <form method="post" class="row">
+            <form method="post" class="row" action="/payment" enctype="multipart/form-data">
               <div class="input-box col-lg-6">
                 <label class="label-text">First Name</label>
                 <div class="form-group">
@@ -94,7 +94,6 @@
                   <input id="phone" class="form-control form--control" type="tel" name="phone" value="${phone}">
                 </div>
               </div><!-- end input-box -->
-            </form>
           </div><!-- end card-body -->
         </div><!-- end card -->
         <div class="card card-item">
@@ -104,12 +103,12 @@
             <div class="payment-option-wrap">
               <div class="payment-tab is-active">
                 <div class="payment-tab-toggle">
-                  <input checked="" id="bankTransfer" name="cash_delivery" type="radio" value="handcash">
+                  <input checked id="bankTransfer" name="cash_delivery" type="radio" value="handcash">
                   <label for="bankTransfer">Direct Payment</label>
                 </div>
 
                 <div class="payment-tab-toggle">
-                  <input checked="" id="bankTransfer" name="cash_delivery" type="radio" value="stripe">
+                  <input id="bankTransfer" name="cash_delivery" type="radio" value="stripe">
                   <label for="bankTransfer">Stripe Payment</label>
                 </div>
 
@@ -126,6 +125,11 @@
             <div class="divider"><span></span></div>
             <div class="order-details-lists">
             <c:forEach var="course" items="${carts}" varStatus="status">
+              <input type="hidden" name="slug[]" value="${course.courseNameSlug}">
+              <input type="hidden" name="course_id[]" value="${course.id}">
+              <input type="hidden" name="course_title[]" value="${course.courseName}">
+              <input type="hidden" name="price[]" value="${course.price}">
+              <input type="hidden" name="instructor_id[]" value="${course.instructorId}">
               <div class="media media-card border-bottom border-bottom-gray pb-3 mb-3">
                 <a href="/course/details/${course.id}/${course.courseNameSlug}" class="media-img">
                   <img src="/upload/course/thumbnail/${course.id}/${course.courseImage}" alt="Cart image">
@@ -177,15 +181,18 @@
             <div class="btn-box border-top border-top-gray pt-3">
               <p class="fs-14 lh-22 mb-2">Aduca is required by law to collect applicable transaction taxes for purchases made in certain tax jurisdictions.</p>
               <p class="fs-14 lh-22 mb-3">By completing your purchase you agree to these <a href="#" class="text-color hover-underline">Terms of Service.</a></p>
-              <a href="checkout.html" class="btn theme-btn w-100">Proceed <i class="la la-arrow-right icon ml-1"></i></a>
+              <button type="submit" class="btn theme-btn w-100">Proceed <i class="la la-arrow-right icon ml-1"></i></button>
             </div>
           </div><!-- end card-body -->
         </div><!-- end card -->
       </div><!-- end col-lg-5 -->
     </div><!-- end row -->
   </div><!-- end container -->
+
 </section>
-</section>
+<input type="hidden" name="${_csrf.parameterName}"
+       value="${_csrf.token}" />
+</form>
 <!-- ================================
        END CONTACT AREA
 ================================= -->
@@ -209,11 +216,9 @@
 <script src="/client/js/emojionearea.min.js"></script>
 <script src="/client/js/tooltipster.bundle.min.js"></script>
 <script src="/client/js/jquery.lazy.min.js"></script>
-<script src="/client/js/main.js"></script>
 <script src="/client/js/plyr.js"></script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="/client/js/main.js"></script>
 <jsp:include page="../layout/script.jsp"/>
 </body>
 <script>
