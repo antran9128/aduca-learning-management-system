@@ -90,7 +90,7 @@
                         <div class="menu-title">Manage Setting</div>
                     </a>
                     <ul>
-                        <li> <a href="#"><i class='bx bx-radio-circle'></i>Manage SMPT</a>
+                        <li> <a href="/admin/smpt/setting"><i class='bx bx-radio-circle'></i>Manage SMPT</a>
                         </li>
                         <li> <a href="#"><i class='bx bx-radio-circle'></i>Site Setting </a>
                         </li>

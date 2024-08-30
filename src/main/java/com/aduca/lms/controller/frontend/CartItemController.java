@@ -7,6 +7,7 @@ import com.aduca.lms.exception.UserNotFoundException;
 import com.aduca.lms.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,8 @@ public class CartItemController {
   private PaymentService paymentService;
   private CourseService courseService;
   private UserService userService;
+  @Autowired
+  private EmailService emailService;
   public CartItemController(CartItemService cartItemService,
                             OrderService orderService,
                             PaymentService paymentService,
@@ -129,6 +132,8 @@ public class CartItemController {
       order.setPrice(price);
       order.setCreatedAt(new Date());
       orderService.save(order);
+      // Send email notification
+      emailService.sendOrderConfirmationEmail((String) session.getAttribute("email"), courseTitle);
     }
 
     cartItemService.deleteByUserId((Long)session.getAttribute("id"));
@@ -138,6 +143,7 @@ public class CartItemController {
     } else {
       redirectAttributes.addFlashAttribute("message", "Cash Payment Submit Successfully");
       redirectAttributes.addFlashAttribute("alertType", "success");
+
       return "redirect:/homepage";
     }
 

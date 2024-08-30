@@ -135,11 +135,11 @@ public class UserService {
         user.setEmail(registerDTO.getEmail());
         user.setPassword(registerDTO.getPassword());
 
-        if(registerDTO.getPhone() != null || !registerDTO.getPhone().isEmpty()){
+        if(registerDTO.getPhone() != null){
           user.setPhone(registerDTO.getPhone());
         }
 
-      if(registerDTO.getAddress() != null || !registerDTO.getAddress().isEmpty()){
+      if(registerDTO.getAddress() != null){
         user.setAddress(registerDTO.getAddress());
       }
         return user;
