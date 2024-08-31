@@ -1,7 +1,12 @@
 package com.aduca.lms.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "payments")
@@ -18,6 +23,9 @@ public class Payment extends IdBasedEntity{
   private String orderMonth;
   private String orderYear;
   private String status;
+
+  @OneToMany(mappedBy = "payment")
+  private List<Order> orders = new ArrayList<>();
 
   public Payment() {
   }
@@ -116,5 +124,13 @@ public class Payment extends IdBasedEntity{
 
   public void setStatus(String status) {
     this.status = status;
+  }
+
+  public List<Order> getOrders() {
+    return orders;
+  }
+
+  public void setOrders(List<Order> orders) {
+    this.orders = orders;
   }
 }

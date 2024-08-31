@@ -107,12 +107,10 @@
                         <div class="menu-title">Manage Orders</div>
                     </a>
                     <ul>
-                        <li> <a href="#"><i class='bx bx-radio-circle'></i>Pending Orders </a>
+                        <li> <a href="/admin/pending/order"><i class='bx bx-radio-circle'></i>Pending Orders </a>
                         </li>
-                        <li> <a href="#"><i class='bx bx-radio-circle'></i>Confirm Orders </a>
+                        <li> <a href="/admin/confirm/order"><i class='bx bx-radio-circle'></i>Confirm Orders </a>
                         </li>
-
-
                     </ul>
                 </li>
 

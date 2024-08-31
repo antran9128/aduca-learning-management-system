@@ -155,5 +155,26 @@ public class CartItemRestController {
     return response;
   }
 
+  @PostMapping("/buy/course/{id}")
+  public Map<String, String> buyCourse(@PathVariable("id") Long id, HttpSession session) throws UserNotFoundException {
+    Map<String, String> response = new HashMap<>();
+    Long userId = (Long) session.getAttribute("id");
+    CartItem item = cartItemService.findByCourseIdAndUserId(id, userId);
+
+    if(item != null){
+      response.put("error", "Course is already in your cart");
+      return response;
+    }
+
+    CartItem course = new CartItem();
+    course.setUser(userService.getUserById(userId));
+    course.setCourse(courseService.getById(id));
+
+    cartItemService.save(course);
+
+    response.put("success", "Successfully Added on Your Cart");
+    return response;
+  }
+
 
 }

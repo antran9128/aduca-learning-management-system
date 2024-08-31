@@ -399,6 +399,55 @@ couponCalculation();
   }
 </script>
 {{-- /// End Remove Coupon  // --}}
+{{-- /// Start Buy Now Button  // --}}
+<script type="text/javascript">
+  function buyCourse(courseId){
+    var csrfValue = $("input[name='_csrf']").val();
+    $.ajax({
+      type: "POST",
+      dataType: 'json',
+      data: {
+        _csrf: csrfValue
+      },
+
+      url: "/buy/course/"+ courseId,
+      success: function(data) {
+        miniCart();
+
+        // Start Message
+
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000
+        })
+        if ($.isEmptyObject(data.error)) {
+
+          Toast.fire({
+            type: 'success',
+            icon: 'success',
+            title: data.success,
+          });
+          // Redirect to the checkout page
+          window.location.href = '/checkout';
+
+        }else{
+
+          Toast.fire({
+            type: 'error',
+            icon: 'error',
+            title: data.error,
+          })
+        }
+
+        // End Message
+      }
+    });
+  }
+
+</script>
+{{-- /// End Buy Now Button  // --}}
 
 
 

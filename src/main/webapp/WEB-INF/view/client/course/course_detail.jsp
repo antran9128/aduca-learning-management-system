@@ -32,7 +32,7 @@
   <!-- end inject -->
 </head>
 <body>
-
+<input type="hidden" name="_csrf" value="${_csrf.token}">
   <jsp:include page="../layout/header.jsp" />
 
   <!-- ================================
@@ -170,7 +170,7 @@
                           ${section.lectures.size()} lectures</span>
                       </button>
                     </div><!-- end card-header -->
-                    <div id="collapse${section.id}" class="collapse show" aria-labelledby="heading $sec->id " data-parent="#accordion">
+                    <div id="collapse${section.id}" class="collapse" aria-labelledby="heading $sec->id " data-parent="#accordion">
                       <div class="card-body">
                         <ul class="generic-list-item">
                           <c:forEach var="lecture" items="${section.lectures}" varStatus="status">
@@ -499,8 +499,7 @@
                     <div class="buy-course-btn-box">
                       <button type="submit" class="btn theme-btn w-100 mb-2" onclick="addToCart(${course.id})" ><i class="la la-shopping-cart fs-18 mr-1"></i> Add to cart</button>
 
-                      <button type="button" class="btn theme-btn w-100 theme-btn-white mb-2"><i class="la la-shopping-bag mr-1"></i> Buy this course</button>
-                    </div>
+                      <button type="button" class="btn theme-btn w-100 theme-btn-white mb-2"  onclick="buyCourse(${course.id})"><i class="la la-shopping-bag mr-1"></i> Buy this course</button>                    </div>
                   </div>
                   <p class="fs-14 text-center pb-4">30-Day Money-Back Guarantee</p>
                   <div class="preview-course-incentives">

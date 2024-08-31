@@ -143,7 +143,6 @@ public class CartItemController {
     } else {
       redirectAttributes.addFlashAttribute("message", "Cash Payment Submit Successfully");
       redirectAttributes.addFlashAttribute("alertType", "success");
-
       return "redirect:/homepage";
     }
 
@@ -154,4 +153,6 @@ public class CartItemController {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
     return LocalDateTime.now().format(formatter);
   }
+
+
 }
