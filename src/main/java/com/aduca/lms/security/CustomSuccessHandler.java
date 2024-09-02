@@ -38,7 +38,6 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
                 return roleTargetUrlMap.get(authorityName);
             }
         }
-
         throw new IllegalStateException();
     }
 
@@ -66,7 +65,6 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 
         redirectStrategy.sendRedirect(request, response, targetUrl);
         clearAuthenticationAttributes(request, authentication);
-
     }
 
 }

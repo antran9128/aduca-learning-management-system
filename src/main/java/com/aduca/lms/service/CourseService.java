@@ -95,8 +95,8 @@ public class CourseService {
       courseDTO.setDiscountPrice(course.getDiscountPrice());
       courseDTO.setPrice(course.getPrice());
       courseDTO.setCourseImage(course.getCourseImage());
+      courseDTO.setInstructorId(course.getInstructor().getId());
       courseDTOS.add(courseDTO);
-
     }
 
     return courseDTOS;

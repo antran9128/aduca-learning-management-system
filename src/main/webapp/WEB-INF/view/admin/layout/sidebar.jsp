@@ -90,7 +90,7 @@
                         <div class="menu-title">Manage Setting</div>
                     </a>
                     <ul>
-                        <li> <a href="#"><i class='bx bx-radio-circle'></i>Manage SMPT</a>
+                        <li> <a href="/admin/smpt/setting"><i class='bx bx-radio-circle'></i>Manage SMPT</a>
                         </li>
                         <li> <a href="#"><i class='bx bx-radio-circle'></i>Site Setting </a>
                         </li>
@@ -107,12 +107,10 @@
                         <div class="menu-title">Manage Orders</div>
                     </a>
                     <ul>
-                        <li> <a href="#"><i class='bx bx-radio-circle'></i>Pending Orders </a>
+                        <li> <a href="/admin/pending/order"><i class='bx bx-radio-circle'></i>Pending Orders </a>
                         </li>
-                        <li> <a href="#"><i class='bx bx-radio-circle'></i>Confirm Orders </a>
+                        <li> <a href="/admin/confirm/order"><i class='bx bx-radio-circle'></i>Confirm Orders </a>
                         </li>
-
-
                     </ul>
                 </li>
 
@@ -124,11 +122,8 @@
                         <div class="menu-title">Manage Report</div>
                     </a>
                     <ul>
-                        <li> <a href="#"><i class='bx bx-radio-circle'></i>Report View </a>
+                        <li> <a href="/admin/report/view"><i class='bx bx-radio-circle'></i>Report View </a>
                         </li>
-
-
-
                     </ul>
                 </li>
 

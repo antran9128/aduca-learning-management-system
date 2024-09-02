@@ -27,7 +27,8 @@
     <link rel="stylesheet" href="/client/css/fancybox.css">
     <link rel="stylesheet" href="/client/css/tooltipster.bundle.css">
     <link rel="stylesheet" href="/client/css/style.css">
-
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     <!-- end inject -->
 </head>
 <body>
@@ -1356,9 +1357,6 @@
     <i class="la la-arrow-up" title="Go top"></i>
 </div>
 <!-- end scroll top -->
-
-
-
 
 <!-- template js files -->
 <script src="/client/js/jquery-3.4.1.min.js"></script>

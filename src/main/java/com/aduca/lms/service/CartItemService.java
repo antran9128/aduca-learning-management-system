@@ -64,4 +64,8 @@ public class CartItemService {
     cartDTO.setTotalPrice(totalPrice(courses));
     return cartDTO;
   }
+  @Transactional
+  public void deleteByUserId(Long id) {
+    repo.deleteByUser_Id(id);
+  }
 }

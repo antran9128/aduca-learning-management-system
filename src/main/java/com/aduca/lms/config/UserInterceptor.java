@@ -31,6 +31,7 @@ public class UserInterceptor implements HandlerInterceptor {
         session.setAttribute("id", user.getId());
         session.setAttribute("email", user.getEmail());
         session.setAttribute("active", user.isStatus());
+        session.setAttribute("role", user.getRole().getName());
       }
     }
     return true;

@@ -1,4 +1,30 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<c:if test="${not empty message}">
+  <script>
+    var type = "${alertType}";
+    switch (type) {
+      case 'info':
+        toastr.info("${message}");
+        break;
+
+      case 'success':
+        toastr.success("${message}");
+        break;
+
+      case 'warning':
+        toastr.warning("${message}");
+        break;
+
+      case 'error':
+        toastr.error("${message}");
+        break;
+    }
+  </script>
+</c:if>
+
 <%--Start Wishlist Add Option--%>
 <script type="text/javascript">
   function addToWishList(courseId){
@@ -33,7 +59,7 @@
     });
   }
 
-  /// WishList Remove Start  //
+
 
   function wishlistRemove(id){
     $.ajax({
@@ -234,7 +260,7 @@
 </script>
 <%--End Wishlist Add Option--%>
 
-{{-- /// Apply Coupon Start  // --}}
+
 <script type="text/javascript">
   function applyCoupon(){
     var coupon_name = $('#coupon_name').val();
@@ -270,15 +296,15 @@
             title: data.error,
           })
         }
-        // End Message
+
       }
     })
   }
 </script>
-{{-- /// End Apply Coupon  // --}}
+
 
 <script>
-/// Start Coupon Calculation Method
+
 function couponCalculation(){
     $.ajax({
     type: 'GET',
@@ -333,9 +359,7 @@ function couponCalculation(){
 }
 couponCalculation();
 </script>
-{{-- /// End Apply Coupon  // --}}
 
-{{-- /// Remove Coupon Start  // --}}
 <script type="text/javascript">
   function couponRemove(){
     $.ajax({
@@ -372,7 +396,55 @@ couponCalculation();
     })
   }
 </script>
-{{-- /// End Remove Coupon  // --}}
+
+<script type="text/javascript">
+  function buyCourse(courseId){
+    var csrfValue = $("input[name='_csrf']").val();
+    $.ajax({
+      type: "POST",
+      dataType: 'json',
+      data: {
+        _csrf: csrfValue
+      },
+
+      url: "/buy/course/"+ courseId,
+      success: function(data) {
+        miniCart();
+
+        // Start Message
+
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000
+        })
+        if ($.isEmptyObject(data.error)) {
+
+          Toast.fire({
+            type: 'success',
+            icon: 'success',
+            title: data.success,
+          });
+          // Redirect to the checkout page
+          window.location.href = '/checkout';
+
+        }else{
+
+          Toast.fire({
+            type: 'error',
+            icon: 'error',
+            title: data.error,
+          })
+        }
+
+        // End Message
+      }
+    });
+  }
+
+</script>
+
 
 
 

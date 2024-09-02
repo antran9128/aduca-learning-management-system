@@ -81,6 +81,8 @@ public class UserService {
             session.setAttribute("id", user.getId());
             session.setAttribute("email", user.getEmail());
             session.setAttribute("active", user.isStatus());
+            session.setAttribute("address", user.getAddress());
+            session.setAttribute("phone", user.getPhone());
             // int sum = user.getCart() == null ? 0 : user.getCart().getSum();
             // session.setAttribute("sum", sum);
         }
@@ -133,11 +135,11 @@ public class UserService {
         user.setEmail(registerDTO.getEmail());
         user.setPassword(registerDTO.getPassword());
 
-        if(registerDTO.getPhone() != null || !registerDTO.getPhone().isEmpty()){
+        if(registerDTO.getPhone() != null){
           user.setPhone(registerDTO.getPhone());
         }
 
-      if(registerDTO.getAddress() != null || !registerDTO.getAddress().isEmpty()){
+      if(registerDTO.getAddress() != null){
         user.setAddress(registerDTO.getAddress());
       }
         return user;

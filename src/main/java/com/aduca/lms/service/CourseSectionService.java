@@ -5,6 +5,8 @@ import com.aduca.lms.repository.CourseRepository;
 import com.aduca.lms.repository.CourseSectionRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CourseSectionService {
   private CourseSectionRepository repo;
@@ -20,4 +22,8 @@ public class CourseSectionService {
   public void deleteSection(Long id) {
     repo.deleteById(id);
   }
+
+    public List<CourseSection> getSectionsByCourseId(Long courseId) {
+      return repo.findByCourseIdOrderByIdAsc(courseId);
+    }
 }

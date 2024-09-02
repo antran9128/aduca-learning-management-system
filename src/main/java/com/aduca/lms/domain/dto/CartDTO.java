@@ -12,11 +12,6 @@ public class CartDTO {
   public CartDTO() {
   }
 
-  public CartDTO(List<CourseDTO> courseDTOs, Double totalPrice, Integer quantity) {
-    this.courseDTOS = courseDTOs;
-    this.totalPrice = totalPrice;
-    this.quantity = quantity;
-  }
 
   public List<CourseDTO> getCourseDTOs() {
     return courseDTOS;
