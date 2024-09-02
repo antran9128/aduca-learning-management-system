@@ -122,11 +122,8 @@
                         <div class="menu-title">Manage Report</div>
                     </a>
                     <ul>
-                        <li> <a href="#"><i class='bx bx-radio-circle'></i>Report View </a>
+                        <li> <a href="/admin/report/view"><i class='bx bx-radio-circle'></i>Report View </a>
                         </li>
-
-
-
                     </ul>
                 </li>
 

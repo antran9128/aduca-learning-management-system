@@ -30,7 +30,7 @@
   <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <title>${admin.name}</title>
+  <title>All Orders</title>
 </head>
 
 <body>
@@ -52,7 +52,7 @@
             <ol class="breadcrumb mb-0 p-0">
               <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
               </li>
-              <li class="breadcrumb-item active" aria-current="page">All Confirm Order</li>
+              <li class="breadcrumb-item active" aria-current="page">All Question</li>
             </ol>
           </nav>
         </div>
@@ -63,7 +63,6 @@
         </div>
       </div>
       <!--end breadcrumb-->
-
       <div class="card">
         <div class="card-body">
           <div class="table-responsive">
@@ -71,41 +70,32 @@
               <thead>
               <tr>
                 <th>Sl</th>
-                <th>Date </th>
-                <th>Invoice</th>
-                <th>Amount</th>
-                <th>Payment</th>
-                <th>Status</th>
+                <th>Course Name </th>
+                <th>Subject</th>
+                <th>User</th>
+                <th>Date</th>
                 <th>Action</th>
               </tr>
               </thead>
               <tbody>
 
-            <c:forEach var="payment" items="${payments}" varStatus="status">
+            <c:forEach var="question" items="${questions}" varStatus="status">
               <tr>
                 <td>${status.index + 1}</td>
-                <td>${payment.orderDate} </td>
-                <td>${payment.invoiceNo}</td>
-                <td>$${payment.totalAmount}</td>
-                <td>${payment.paymentType}</td>
-                <td> <span class="badge rounded-pill bg-success"> ${payment.status}</span></td>
+                <td>${question.course.courseName}</td>
+                <td>${question.subject}</td>
+                <td>${question.user.name}</td>
+                <td>${question.sentTime}</td>
                 <td>
-                  <a href="/admin/order/details/${payment.id}" class="btn btn-info px-5">Details  </a>
-
+                  <a href="/instructor/question/details/${question.id}" class="btn btn-info" title="Edit" style="display: inline-block"><i class="lni lni-eye" style="display: inline"></i> </a>
                 </td>
               </tr>
             </c:forEach>
-
               </tbody>
-
             </table>
           </div>
         </div>
       </div>
-
-
-
-
     </div>
   </div>
   <!--end page wrapper -->
@@ -138,7 +128,6 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
   new PerfectScrollbar(".app-container")
-
 </script>
 <c:if test="${not empty message}">
   <script>
@@ -162,6 +151,5 @@
     }
   </script>
 </c:if>
-
 </body>
 </html>

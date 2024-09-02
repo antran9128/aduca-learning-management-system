@@ -59,7 +59,7 @@
     });
   }
 
-  /// WishList Remove Start  //
+
 
   function wishlistRemove(id){
     $.ajax({
@@ -260,7 +260,7 @@
 </script>
 <%--End Wishlist Add Option--%>
 
-{{-- /// Apply Coupon Start  // --}}
+
 <script type="text/javascript">
   function applyCoupon(){
     var coupon_name = $('#coupon_name').val();
@@ -296,15 +296,15 @@
             title: data.error,
           })
         }
-        // End Message
+
       }
     })
   }
 </script>
-{{-- /// End Apply Coupon  // --}}
+
 
 <script>
-/// Start Coupon Calculation Method
+
 function couponCalculation(){
     $.ajax({
     type: 'GET',
@@ -359,9 +359,7 @@ function couponCalculation(){
 }
 couponCalculation();
 </script>
-{{-- /// End Apply Coupon  // --}}
 
-{{-- /// Remove Coupon Start  // --}}
 <script type="text/javascript">
   function couponRemove(){
     $.ajax({
@@ -398,8 +396,7 @@ couponCalculation();
     })
   }
 </script>
-{{-- /// End Remove Coupon  // --}}
-{{-- /// Start Buy Now Button  // --}}
+
 <script type="text/javascript">
   function buyCourse(courseId){
     var csrfValue = $("input[name='_csrf']").val();
@@ -447,7 +444,7 @@ couponCalculation();
   }
 
 </script>
-{{-- /// End Buy Now Button  // --}}
+
 
 
 

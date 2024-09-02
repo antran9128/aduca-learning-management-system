@@ -4,6 +4,7 @@ import com.aduca.lms.domain.Payment;
 import com.aduca.lms.repository.PaymentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,5 +25,17 @@ public class PaymentService {
 
   public Payment findById(Long id) {
     return repository.findById(id).get();
+  }
+
+    public List<Payment> findByOrderDate(String date) {
+      return repository.findByOrderDate(date);
+    }
+
+  public List<Payment> findByOrderMonth(String month, String year) {
+    return repository.findByOrderMonthAndOrderYear(month, year);
+  }
+
+  public List<Payment> findByOrderYear(String year) {
+    return repository.findByOrderYear(year);
   }
 }

@@ -1,7 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
         <div class="sidebar-wrapper" data-simplebar="true">
             <div class="sidebar-header">
                 <div>
@@ -35,6 +33,30 @@
                 </a>
                 <ul>
                   <li> <a href="/instructor/all/course"><i class='bx bx-radio-circle'></i>All Course </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <a class="has-arrow" href="javascript:;">
+                  <div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
+                  </div>
+                  <div class="menu-title">All Orders</div>
+                </a>
+                <ul>
+                  <li> <a href="/instructor/all/order"><i class='bx bx-radio-circle'></i>All Orders</a>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <a class="has-arrow" href="javascript:;">
+                  <div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
+                  </div>
+                  <div class="menu-title">All Question</div>
+                </a>
+                <ul>
+                  <li> <a href="/instructor/all/question"><i class='bx bx-radio-circle'></i>All Question</a>
                   </li>
                 </ul>
               </li>

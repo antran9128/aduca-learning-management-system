@@ -202,29 +202,29 @@
                         </td>
                       </tr>
 
-                    <c:forEach var="order" items="${orders}" varStatus="status">
-                      <tr>
-                        <td class="col-md-1">
-                          <label><img src="/upload/course/thumbnail/${order.course.id}/${order.course.courseImage}" alt="" style="width: 50px; height:50px;"> </label>
-                        </td>
+                      <c:forEach var="order" items="${orders}" varStatus="status">
+                        <tr>
+                          <td class="col-md-1">
+                            <label><img src="/upload/course/thumbnail/${order.course.id}/${order.course.courseImage}" alt="" style="width: 50px; height:50px;"> </label>
+                          </td>
 
-                        <td class="col-md-2">
-                          <label>${order.course.courseName}</label>
-                        </td>
+                          <td class="col-md-2">
+                            <label>${order.course.courseName}</label>
+                          </td>
 
-                        <td class="col-md-2">
-                          <label>${order.course.category.categoryName}</label>
-                        </td>
+                          <td class="col-md-2">
+                            <label>${order.course.category.categoryName}</label>
+                          </td>
 
-                        <td class="col-md-2">
-                          <label>${order.instructor.name}</label>
-                        </td>
+                          <td class="col-md-2">
+                            <label>${order.instructor.name}</label>
+                          </td>
 
-                        <td class="col-md-2">
-                          <label> ${order.price} </label>
-                        </td>
-                      </tr>
-                    </c:forEach>
+                          <td class="col-md-2">
+                            <label> ${order.price} </label>
+                          </td>
+                        </tr>
+                      </c:forEach>
                       </tbody>
                     </table>
                   </div>

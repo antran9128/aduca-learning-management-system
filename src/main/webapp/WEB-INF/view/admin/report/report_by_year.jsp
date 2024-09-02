@@ -52,7 +52,7 @@
             <ol class="breadcrumb mb-0 p-0">
               <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
               </li>
-              <li class="breadcrumb-item active" aria-current="page">All Confirm Order</li>
+              <li class="breadcrumb-item active" aria-current="page">Report By Date </li>
             </ol>
           </nav>
         </div>
@@ -63,7 +63,7 @@
         </div>
       </div>
       <!--end breadcrumb-->
-
+      <h3> Seach By Year : ${year} </h3>
       <div class="card">
         <div class="card-body">
           <div class="table-responsive">
@@ -72,40 +72,33 @@
               <tr>
                 <th>Sl</th>
                 <th>Date </th>
+                <th>User</th>
+                <th>Email</th>
                 <th>Invoice</th>
                 <th>Amount</th>
                 <th>Payment</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th>Status </th>
               </tr>
               </thead>
               <tbody>
 
-            <c:forEach var="payment" items="${payments}" varStatus="status">
+              <c:forEach var="payment" items="${payments}" varStatus="status">
               <tr>
                 <td>${status.index + 1}</td>
-                <td>${payment.orderDate} </td>
+                <td>${payment.orderDate}  </td>
+                <td>${payment.name}</td>
+                <td>${payment.email}</td>
                 <td>${payment.invoiceNo}</td>
-                <td>$${payment.totalAmount}</td>
+                <td>${payment.totalAmount}</td>
                 <td>${payment.paymentType}</td>
-                <td> <span class="badge rounded-pill bg-success"> ${payment.status}</span></td>
-                <td>
-                  <a href="/admin/order/details/${payment.id}" class="btn btn-info px-5">Details  </a>
-
-                </td>
+                <td> <span class="badge rounded-pill bg-success">${payment.status}</span> </td>
               </tr>
-            </c:forEach>
-
+              </c:forEach>
               </tbody>
-
             </table>
           </div>
         </div>
       </div>
-
-
-
-
     </div>
   </div>
   <!--end page wrapper -->
@@ -133,12 +126,14 @@
 <script src="/admin/plugins/chartjs/js/chart.js"></script>
 <script src="/admin/js/index.js"></script>
 <!--app JS-->
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="/admin/js/app.js"></script>
+<script src="/admin/js/code.js"></script>
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
   new PerfectScrollbar(".app-container")
-
 </script>
 <c:if test="${not empty message}">
   <script>
@@ -162,6 +157,5 @@
     }
   </script>
 </c:if>
-
 </body>
 </html>

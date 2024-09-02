@@ -47,8 +47,8 @@ public class CourseLectureController {
     CourseLecture lectureDb = lectureService.findLectureById(lecture.getId());
     lectureDb.setlectureTitle(lecture.getlectureTitle());
     lectureDb.setContent(lecture.getContent());
-    lecture.setUrl(lecture.getUrl());
-    lecture.setUpdatedAt(new Date());
+    lectureDb.setUrl(lecture.getUrl());
+    lectureDb.setUpdatedAt(new Date());
     lectureService.save(lectureDb);
 
     redirectAttributes.addFlashAttribute("message", "Edit Course Lecture Successfully");

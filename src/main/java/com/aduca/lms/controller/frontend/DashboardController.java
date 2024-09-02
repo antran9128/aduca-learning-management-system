@@ -38,7 +38,14 @@ public class DashboardController {
     }
 
     @GetMapping("/dashboard")
-    public String getUserDashboard(HttpServletRequest request, Model model) {
+    public String getUserDashboard(HttpSession session, Model model) {
+      String role = (String) session.getAttribute("role");
+        if(role.equals("Admin")){
+          return "redirect:/admin";
+        }
+        if(role.equals("Instructor")){
+          return "redirect:/instructor";
+        }
         return "client/dashboard/show";
     }
 

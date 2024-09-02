@@ -28,10 +28,9 @@ public class GlobalControllerAdvice {
   }
 
   @ModelAttribute
-  public void addCategoriesToModel(Model model, HttpServletRequest request) {
+  public void addCategoriesToModel(Model model, HttpSession session) {
     List<Category> categories = categoryService.getAll();
     model.addAttribute("globalCategories", categories);
-    HttpSession session = request.getSession(false);
     List<Course> courses = wishListService.getCoursesByUserId((Long) session.getAttribute("id"));
     model.addAttribute("wishCount", courses.size());
   }
